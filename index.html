@@ -26,6 +26,16 @@ body{font-family:system-ui,sans-serif;font-size:13px;background:#f0f0ee;min-heig
 .input-box.markup input{border-bottom-color:#EF9F27;color:#854F0B}
 .input-box.markup{border-color:#EF9F27;background:#FFF8EC}
 .modulo-efectivo{margin-top:8px;padding:6px 10px;background:#FFF0CC;border-radius:6px;font-size:12px;color:#854F0B}
+/* DATOS DEL TRABAJO */
+.trabajo-box{background:#fff;border:0.5px solid #ddd;border-radius:10px;padding:12px 16px;margin-bottom:10px}
+.trabajo-box .tit{font-size:12px;font-weight:600;color:#555;margin-bottom:10px;text-transform:uppercase;letter-spacing:.04em}
+.trabajo-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.trabajo-field{display:flex;flex-direction:column;gap:4px}
+.trabajo-field label{font-size:11px;color:#888}
+.trabajo-field input,.trabajo-field textarea,.trabajo-field select{font-size:13px;padding:6px 10px;border:0.5px solid #ccc;border-radius:6px;background:#fafafa;outline:none;color:#111;font-family:inherit}
+.trabajo-field textarea{resize:vertical;min-height:52px}
+.trabajo-field.full{grid-column:1/-1}
+/* TABS */
 .tabs{display:flex;gap:8px;margin-bottom:10px}
 .tab{flex:1;padding:9px 14px;border-radius:8px;border:0.5px solid #ddd;background:#fff;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-size:13px;color:#555}
 .tab.active-t{background:#E6F1FB;border:1.5px solid #85B7EB;color:#0C447C;font-weight:600}
@@ -43,27 +53,19 @@ body{font-family:system-ui,sans-serif;font-size:13px;background:#f0f0ee;min-heig
 .group-body{display:none}
 .group-body.open{display:block}
 .row{display:grid;grid-template-columns:24px 1fr 90px 74px 72px 102px;gap:6px;align-items:center;padding:7px 12px;border-top:0.5px solid #eee}
-.row.even{background:#fff}
-.row.odd{background:#fafaf8}
-.row.checked-t{background:#EEF6FF}
-.row.checked-l{background:#F0FAE8}
-.row.checked-h{background:#F7F0FF}
+.row.even{background:#fff}.row.odd{background:#fafaf8}
+.row.checked-t{background:#EEF6FF}.row.checked-l{background:#F0FAE8}.row.checked-h{background:#F7F0FF}
 .row input[type=checkbox]{cursor:pointer;accent-color:#378ADD;width:15px;height:15px}
 .row.l-row input[type=checkbox]{accent-color:#639922}
-.item-name{font-size:12px;color:#555}
-.item-name.on{color:#111;font-weight:500}
+.item-name{font-size:12px;color:#555}.item-name.on{color:#111;font-weight:500}
 .fixed-badge{font-size:10px;color:#aaa;font-weight:400}
 select,input[type=number]{font-size:12px;padding:3px 5px;border-radius:5px;border:0.5px solid #ccc;background:#fff;outline:none}
 select:disabled,input[type=number]:disabled{opacity:.35;cursor:not-allowed}
-.mods{text-align:right;font-size:12px;color:#bbb;font-weight:400}
-.mods.on{color:#111;font-weight:600}
+.mods{text-align:right;font-size:12px;color:#bbb}.mods.on{color:#111;font-weight:600}
 .importe{text-align:right;font-size:12px;font-weight:600;color:#ccc}
-.importe.t{color:#185FA5}
-.importe.l{color:#3B6D11}
-.importe.h{color:#4A2D8A}
+.importe.t{color:#185FA5}.importe.l{color:#3B6D11}.importe.h{color:#4A2D8A}
 .hora-row{display:grid;grid-template-columns:1fr 112px 92px 90px 110px;gap:6px;align-items:center;padding:8px 12px;border-top:0.5px solid #eee}
-.role-label{font-size:12px;font-weight:400;color:#444}
-.role-label.on{font-weight:600;color:#4A2D8A}
+.role-label{font-size:12px;font-weight:400;color:#444}.role-label.on{font-weight:600;color:#4A2D8A}
 .role-desc{font-size:10px;color:#aaa}
 .mods-hora{text-align:center;font-size:12px;color:#7B5EA7;font-weight:500}
 .mods-hora small{display:block;font-size:10px;color:#aaa;font-weight:400}
@@ -76,6 +78,46 @@ select:disabled,input[type=number]:disabled{opacity:.35;cursor:not-allowed}
 .total-amount{font-size:26px;font-weight:700;color:#111;text-align:right}
 .total-note{font-size:10px;color:#aaa;margin-top:3px;text-align:right}
 .total-mods{font-size:11px;color:#aaa;margin-bottom:2px;text-align:right}
+.pdf-btn{margin-top:12px;width:100%;padding:11px;background:#185FA5;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px}
+.pdf-btn:hover{background:#0C447C}
+
+/* ── PRINT STYLES ── */
+@media print{
+  body{background:#fff;padding:0;display:block}
+  #login-screen,#app .header-inputs,#app .tabs,#section-t,#section-l,#group-hora,.total-bar,.pdf-btn,.trabajo-box,.clear-btn{display:none!important}
+  #print-report{display:block!important}
+}
+#print-report{display:none}
+
+/* REPORT STYLES (visible al imprimir) */
+.rpt{font-family:system-ui,sans-serif;font-size:12px;color:#111;max-width:800px;margin:0 auto;padding:20px}
+.rpt-logo{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:18px;padding-bottom:14px;border-bottom:2px solid #185FA5}
+.rpt-logo h1{font-size:20px;font-weight:700;color:#185FA5}
+.rpt-logo .sub{font-size:11px;color:#888;margin-top:3px}
+.rpt-logo .fecha{font-size:11px;color:#888;text-align:right}
+.rpt-datos{background:#f5f5f3;border-radius:8px;padding:12px 16px;margin-bottom:16px;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.rpt-datos .field label{font-size:10px;color:#888;text-transform:uppercase;letter-spacing:.04em}
+.rpt-datos .field p{font-size:13px;font-weight:500;margin-top:2px}
+.rpt-datos .field.full{grid-column:1/-1}
+.rpt-section{margin-bottom:14px}
+.rpt-section h3{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;padding:5px 10px;margin-bottom:0;border-radius:4px 4px 0 0}
+.rpt-section h3.t{background:#E6F1FB;color:#0C447C}
+.rpt-section h3.l{background:#EAF3DE;color:#27500A}
+.rpt-section h3.h{background:#F3EEFB;color:#4A2D8A}
+.rpt-table{width:100%;border-collapse:collapse;font-size:12px}
+.rpt-table th{background:#f0f0ee;padding:5px 8px;text-align:left;font-weight:600;font-size:10px;color:#666;border:0.5px solid #ddd}
+.rpt-table th:last-child,.rpt-table td:last-child{text-align:right}
+.rpt-table th:nth-child(3),.rpt-table td:nth-child(3){text-align:center}
+.rpt-table td{padding:5px 8px;border:0.5px solid #eee}
+.rpt-table tr:nth-child(even) td{background:#fafaf8}
+.rpt-total{background:#185FA5;color:#fff;border-radius:6px;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;margin-top:16px}
+.rpt-total .lbl{font-size:11px;opacity:.85}
+.rpt-total .amt{font-size:22px;font-weight:700}
+.rpt-total .sub2{font-size:10px;opacity:.7;margin-top:2px;text-align:right}
+.rpt-footer{margin-top:20px;padding-top:10px;border-top:0.5px solid #ddd;font-size:10px;color:#aaa;text-align:center}
+.rpt-notas{background:#fffbe6;border:0.5px solid #f0d080;border-radius:6px;padding:10px 14px;margin-top:14px;font-size:12px}
+.rpt-notas label{font-size:10px;font-weight:600;color:#888;text-transform:uppercase}
+.rpt-notas p{margin-top:4px;color:#333}
 </style>
 </head>
 <body>
@@ -112,14 +154,31 @@ select:disabled,input[type=number]:disabled{opacity:.35;cursor:not-allowed}
     <div id="modulo-efectivo-bar" style="display:none" class="modulo-efectivo"></div>
   </div>
 
+  <!-- DATOS DEL TRABAJO -->
+  <div class="trabajo-box">
+    <div class="tit">Datos del trabajo</div>
+    <div class="trabajo-grid">
+      <div class="trabajo-field">
+        <label>Cliente</label>
+        <input type="text" id="d-cliente" placeholder="Razón social o nombre">
+      </div>
+      <div class="trabajo-field">
+        <label>Período</label>
+        <input type="month" id="d-periodo">
+      </div>
+      <div class="trabajo-field full">
+        <label>Notas / observaciones internas</label>
+        <textarea id="d-notas" placeholder="Aclaraciones, condiciones, descuentos, etc."></textarea>
+      </div>
+    </div>
+  </div>
+
   <div class="tabs">
     <div class="tab active-t" id="tab-t" onclick="switchTab('t')">
-      <span>Tributario</span>
-      <span class="tab-badge" id="badge-t">$0</span>
+      <span>Tributario</span><span class="tab-badge" id="badge-t">$0</span>
     </div>
     <div class="tab" id="tab-l" onclick="switchTab('l')">
-      <span>Laboral y previsional</span>
-      <span class="tab-badge" id="badge-l">$0</span>
+      <span>Laboral y previsional</span><span class="tab-badge" id="badge-l">$0</span>
     </div>
   </div>
 
@@ -157,184 +216,162 @@ select:disabled,input[type=number]:disabled{opacity:.35;cursor:not-allowed}
     </div>
   </div>
 
+  <button class="pdf-btn" onclick="generarPDF()">
+    &#128438; Generar informe PDF
+  </button>
+
 </div>
 
+<!-- REPORTE IMPRIMIBLE -->
+<div id="print-report"></div>
+
 <script>
-// ── AUTH ──────────────────────────────────────────────────────────────
-const PWD = "SanMiguel2026!";
+const PWD="SanMiguel2026!";
 function checkPwd(){
-  const v = document.getElementById('pwd-input').value;
-  if(v === PWD){
-    document.getElementById('login-screen').style.display='none';
-    document.getElementById('app').style.display='block';
-    init();
-  } else {
-    document.getElementById('pwd-error').textContent='Contraseña incorrecta. Intentá de nuevo.';
-    document.getElementById('pwd-input').value='';
-  }
+  const v=document.getElementById('pwd-input').value;
+  if(v===PWD){document.getElementById('login-screen').style.display='none';document.getElementById('app').style.display='block';init();}
+  else{document.getElementById('pwd-error').textContent='Contraseña incorrecta. Intentá de nuevo.';document.getElementById('pwd-input').value='';}
 }
 
-// ── DATOS ─────────────────────────────────────────────────────────────
-const DATA = {
+const DATA={
   t:[
-    {gid:"g1", name:"Liquidación mensual de impuestos", items:[
-      {id:"iibb_loc", n:"Ingresos Brutos Locales", a:15, m:10, b:7},
-      {id:"iibb_cm",  n:"IIBB – Convenio Multilateral", a:20, m:12, b:10},
-      {id:"sicore",   n:"SI.CO.RE.", a:20, m:12, b:10},
-      {id:"iva",      n:"I.V.A.", a:15, m:10, b:7},
-      {id:"ret_loc",  n:"Retención y Percepción Locales", a:20, m:12, b:10},
+    {gid:"g1",name:"Liquidación mensual de impuestos",items:[
+      {id:"iibb_loc",n:"Ingresos Brutos Locales",a:15,m:10,b:7},
+      {id:"iibb_cm",n:"IIBB – Convenio Multilateral",a:20,m:12,b:10},
+      {id:"sicore",n:"SI.CO.RE.",a:20,m:12,b:10},
+      {id:"iva",n:"I.V.A.",a:15,m:10,b:7},
+      {id:"ret_loc",n:"Retención y Percepción Locales",a:20,m:12,b:10},
     ]},
-    {gid:"g2", name:"Liquidación anual de impuestos", items:[
-      {id:"gcias_pf", n:"Ganancias – Personas Físicas", a:80, m:50, b:30},
-      {id:"bp",       n:"Bienes Personales", a:35, m:20, b:15},
-      {id:"bp_acc",   n:"Bienes Personales – Acciones y Part. Soc.", a:20, m:15, b:10},
-      {id:"gcias_pj", n:"Ganancias – Personas Jurídicas", a:55, m:35, b:25},
-      {id:"gmp",      n:"Ganancia Mínima Presunta", a:40, m:25, b:15},
-      {id:"iibb_a",   n:"Ingresos Brutos Locales (anual)", a:25, m:20, b:15},
-      {id:"cm_a",     n:"Convenio Multilateral (anual)", a:55, m:30, b:20},
+    {gid:"g2",name:"Liquidación anual de impuestos",items:[
+      {id:"gcias_pf",n:"Ganancias – Personas Físicas",a:80,m:50,b:30},
+      {id:"bp",n:"Bienes Personales",a:35,m:20,b:15},
+      {id:"bp_acc",n:"Bienes Personales – Acciones y Part. Soc.",a:20,m:15,b:10},
+      {id:"gcias_pj",n:"Ganancias – Personas Jurídicas",a:55,m:35,b:25},
+      {id:"gmp",n:"Ganancia Mínima Presunta",a:40,m:25,b:15},
+      {id:"iibb_a",n:"Ingresos Brutos Locales (anual)",a:25,m:20,b:15},
+      {id:"cm_a",n:"Convenio Multilateral (anual)",a:55,m:30,b:20},
     ]},
-    {gid:"g3", name:"Regímenes de información", items:[
-      {id:"reginfo", n:"CITI Ventas/Compras, SITER, etc.", fixed:15},
+    {gid:"g3",name:"Regímenes de información",items:[
+      {id:"reginfo",n:"CITI Ventas/Compras, SITER, etc.",fixed:15},
     ]},
-    {gid:"g4", name:"Inspecciones y requerimientos", items:[
-      {id:"insp_t", n:"Por hora profesional (mín. 30 mód.)", a:27, m:20, b:13, byHour:true},
+    {gid:"g4",name:"Inspecciones y requerimientos",items:[
+      {id:"insp_t",n:"Por hora profesional (mín. 30 mód.)",a:27,m:20,b:13,byHour:true},
     ]},
-    {gid:"g5", name:"Inscripciones en AFIP", items:[
-      {id:"inscr_afip", n:"Alta / Baja en AFIP", a:27, m:20, b:13},
+    {gid:"g5",name:"Inscripciones en AFIP",items:[
+      {id:"inscr_afip",n:"Alta / Baja en AFIP",a:27,m:20,b:13},
     ]},
-    {gid:"g6", name:"Actividades específicas (Res. 35/2022)", items:[
-      {id:"mono_recat", n:"Recategorización Monotributistas", a:10, m:8, b:6},
-      {id:"iibb_recat", n:"Recategorización IIBB CABA", a:10, m:8, b:6},
-      {id:"reli",       n:"RELI – Registro contratos de locación", a:11, m:8, b:5},
-      {id:"censo",      n:"Censo Nacional Económico (INDEC)", a:15, m:11, b:5},
-      {id:"ceta",       n:"CETA – Transferencia de Automotores", fixed:4},
-      {id:"coti",       n:"COTI – Transferencia de Inmuebles", fixed:4},
-      {id:"bcumpl",     n:"Beneficio Cumplidor sin Disconformidad", fixed:4},
-      {id:"condo",      n:"Condonación de Deuda sin Disconformidad", fixed:6},
-      {id:"dev_perc",   n:"Devolución Percepciones – No Inscriptos", fixed:7},
-      {id:"f572",       n:"Formulario 572 / SIRADIG", a:20, m:12, b:8},
-      {id:"plan_pago",  n:"Plan de Pagos", a:16, m:11, b:8},
-      {id:"iti",        n:"ITI – Transferencia de Inmuebles (web)", a:15, m:10, b:6},
-      {id:"empadron",   n:"Empadronamiento Empleadores CABA", a:20, m:12, b:8},
+    {gid:"g6",name:"Actividades específicas (Res. 35/2022)",items:[
+      {id:"mono_recat",n:"Recategorización Monotributistas",a:10,m:8,b:6},
+      {id:"iibb_recat",n:"Recategorización IIBB CABA",a:10,m:8,b:6},
+      {id:"reli",n:"RELI – Registro contratos de locación",a:11,m:8,b:5},
+      {id:"censo",n:"Censo Nacional Económico (INDEC)",a:15,m:11,b:5},
+      {id:"ceta",n:"CETA – Transferencia de Automotores",fixed:4},
+      {id:"coti",n:"COTI – Transferencia de Inmuebles",fixed:4},
+      {id:"bcumpl",n:"Beneficio Cumplidor sin Disconformidad",fixed:4},
+      {id:"condo",n:"Condonación de Deuda sin Disconformidad",fixed:6},
+      {id:"dev_perc",n:"Devolución Percepciones – No Inscriptos",fixed:7},
+      {id:"f572",n:"Formulario 572 / SIRADIG",a:20,m:12,b:8},
+      {id:"plan_pago",n:"Plan de Pagos",a:16,m:11,b:8},
+      {id:"iti",n:"ITI – Transferencia de Inmuebles (web)",a:15,m:10,b:6},
+      {id:"empadron",n:"Empadronamiento Empleadores CABA",a:20,m:12,b:8},
     ]},
   ],
   l:[
-    {gid:"g7", name:"Liquidación mensual sueldos y cargas sociales", items:[
-      {id:"sue_10",  n:"Hasta 10 empleados", fixed:15},
-      {id:"sue_40",  n:"De 11 a 40 empleados", fixed:30},
-      {id:"sue_80",  n:"De 41 a 80 empleados", fixed:45},
-      {id:"sue_160", n:"De 81 a 160 empleados", fixed:65},
-      {id:"sue_mas", n:"Más de 160 empleados", fixed:85},
+    {gid:"g7",name:"Liquidación mensual sueldos y cargas sociales",items:[
+      {id:"sue_10",n:"Hasta 10 empleados",fixed:15},
+      {id:"sue_40",n:"De 11 a 40 empleados",fixed:30},
+      {id:"sue_80",n:"De 41 a 80 empleados",fixed:45},
+      {id:"sue_160",n:"De 81 a 160 empleados",fixed:65},
+      {id:"sue_mas",n:"Más de 160 empleados",fixed:85},
     ]},
-    {gid:"g8", name:"Inscripciones y trámites previsionales", items:[
-      {id:"afip_empl",   n:"Inscripción AFIP – Empleador", fixed:30},
-      {id:"asig_as",     n:"Asesoramiento reintegro asignaciones familiares", fixed:10},
-      {id:"asig_tr",     n:"Certificación y trámite reintegro asignaciones", fixed:20},
-      {id:"deudas_prev", n:"Det. deudas/créditos previsionales (por año/afiliado)", fixed:20},
+    {gid:"g8",name:"Inscripciones y trámites previsionales",items:[
+      {id:"afip_empl",n:"Inscripción AFIP – Empleador",fixed:30},
+      {id:"asig_as",n:"Asesoramiento reintegro asignaciones familiares",fixed:10},
+      {id:"asig_tr",n:"Certificación y trámite reintegro asignaciones",fixed:20},
+      {id:"deudas_prev",n:"Det. deudas/créditos previsionales (por año/afiliado)",fixed:20},
     ]},
-    {gid:"g9", name:"Inspecciones y requerimientos laborales", items:[
-      {id:"insp_l", n:"Por caso (mínimo 30 módulos)", fixed:30},
+    {gid:"g9",name:"Inspecciones y requerimientos laborales",items:[
+      {id:"insp_l",n:"Por caso (mínimo 30 módulos)",fixed:30},
     ]},
-    {gid:"g10", name:"Otros", items:[
-      {id:"sicam",   n:"Liquidación aportes autónomos – SICAM", fixed:10},
-      {id:"rubrica", n:"Asesoramiento rúbrica de libros (GCBA)", fixed:10},
+    {gid:"g10",name:"Otros",items:[
+      {id:"sicam",n:"Liquidación aportes autónomos – SICAM",fixed:10},
+      {id:"rubrica",n:"Asesoramiento rúbrica de libros (GCBA)",fixed:10},
     ]},
   ]
 };
 
-const ROLES = [
-  {id:"jr",    label:"Analista Jr.",  modsH:2.5, desc:"Bajo valor agregado"},
-  {id:"sr",    label:"Analista Sr.",  modsH:5,   desc:"Medio valor agregado"},
-  {id:"socio", label:"Socio",         modsH:7,   desc:"Alto valor agregado"},
+const ROLES=[
+  {id:"jr",label:"Analista Jr.",modsH:2.5,desc:"Bajo valor agregado"},
+  {id:"sr",label:"Analista Sr.",modsH:5,desc:"Medio valor agregado"},
+  {id:"socio",label:"Socio",modsH:7,desc:"Alto valor agregado"},
 ];
 
-// ── ESTADO ────────────────────────────────────────────────────────────
-let modulo = 13287;
-let markup = 0;
-let sel = {};
-let horas = {jr:0, sr:0, socio:0};
-let openGroups = {};
-let ghOpen = true;
-let activeTab = 't';
+let modulo=13287,markup=0,sel={},horas={jr:0,sr:0,socio:0},openGroups={},ghOpen=true,activeTab='t';
 
-function modEfectivo(){ return modulo * (1 + markup/100); }
-function fmt(n){ return '$\u00a0' + Math.round(n).toLocaleString('es-AR'); }
-function fmtM(n){ return n % 1 === 0 ? ''+n : n.toFixed(1); }
-
-function getMods(item, s){
-  if(!s || !s.on) return 0;
-  const c = s.comp || 'm', qty = parseFloat(s.qty)||1;
-  if(item.fixed !== undefined) return item.fixed * qty;
-  const base = item[c] || 0;
-  if(item.byHour) return Math.max(base * qty, 30);
-  return base * qty;
+function modEfectivo(){return modulo*(1+markup/100);}
+function fmt(n){return '$\u00a0'+Math.round(n).toLocaleString('es-AR');}
+function fmtM(n){return n%1===0?''+n:n.toFixed(1);}
+function getMods(item,s){
+  if(!s||!s.on)return 0;
+  const c=s.comp||'m',qty=parseFloat(s.qty)||1;
+  if(item.fixed!==undefined)return item.fixed*qty;
+  const base=item[c]||0;
+  if(item.byHour)return Math.max(base*qty,30);
+  return base*qty;
 }
+function compLabel(c){return c==='a'?'Alta':c==='b'?'Baja':'Media';}
 
-// ── RENDER ────────────────────────────────────────────────────────────
 function renderSection(sec){
-  const el = document.getElementById('section-'+sec);
-  const isT = sec==='t';
-  el.innerHTML = DATA[sec].map(g => {
-    const isOpen = openGroups[g.gid];
-    const rows = g.items.map((item,idx) => {
-      const s = sel[item.id] || {on:false, comp:'m', qty:1};
-      const mods = getMods(item, s);
-      const me = modEfectivo();
-      const hasComp = item.fixed===undefined && !item.byHour;
-      const isHour = item.byHour;
-      const cls = s.on ? (isT?'checked-t':'checked-l') : (idx%2===0?'even':'odd');
-      const compSel = (hasComp||isHour)
-        ? `<select onchange="updateSel('${item.id}','comp',this.value)" ${s.on?'':'disabled'}>
-            <option value="a" ${(s.comp||'m')==='a'?'selected':''}>Alta</option>
-            <option value="m" ${(s.comp||'m')==='m'?'selected':''}>Media</option>
-            <option value="b" ${(s.comp||'m')==='b'?'selected':''}>Baja</option>
-           </select>`
-        : '<span style="font-size:11px;color:#bbb">—</span>';
-      const qtyEl = `<div style="display:flex;align-items:center;gap:3px">
-        <input type="number" min="1" value="${s.qty||1}" ${s.on?'':'disabled'}
-          style="width:46px;text-align:center"
-          onchange="updateSel('${item.id}','qty',Math.max(1,parseInt(this.value)||1))">
-        <span style="font-size:10px;color:#aaa">${isHour?'hs':'×'}</span>
-      </div>`;
-      const modsEl = `<div class="mods ${s.on&&mods>0?'on':''}">${s.on&&mods>0?fmtM(mods):'—'}</div>`;
-      const impEl  = `<div class="importe ${s.on&&mods>0?(isT?'t':'l'):''}">${s.on&&mods>0?fmt(mods*me):'—'}</div>`;
-      const nameEl = `<div class="item-name ${s.on?'on':''}">${item.n}${item.fixed!==undefined?`<span class="fixed-badge"> (fijo: ${item.fixed})</span>`:''}</div>`;
+  const el=document.getElementById('section-'+sec);
+  const isT=sec==='t';
+  el.innerHTML=DATA[sec].map(g=>{
+    const isOpen=openGroups[g.gid];
+    const rows=g.items.map((item,idx)=>{
+      const s=sel[item.id]||{on:false,comp:'m',qty:1};
+      const mods=getMods(item,s);
+      const me=modEfectivo();
+      const hasComp=item.fixed===undefined&&!item.byHour;
+      const isHour=item.byHour;
+      const cls=s.on?(isT?'checked-t':'checked-l'):(idx%2===0?'even':'odd');
+      const compSel=(hasComp||isHour)?`<select onchange="updateSel('${item.id}','comp',this.value)" ${s.on?'':'disabled'}>
+        <option value="a" ${(s.comp||'m')==='a'?'selected':''}>Alta</option>
+        <option value="m" ${(s.comp||'m')==='m'?'selected':''}>Media</option>
+        <option value="b" ${(s.comp||'m')==='b'?'selected':''}>Baja</option>
+      </select>`:'<span style="font-size:11px;color:#bbb">—</span>';
+      const qtyEl=`<div style="display:flex;align-items:center;gap:3px">
+        <input type="number" min="1" value="${s.qty||1}" ${s.on?'':'disabled'} style="width:46px;text-align:center" onchange="updateSel('${item.id}','qty',Math.max(1,parseInt(this.value)||1))">
+        <span style="font-size:10px;color:#aaa">${isHour?'hs':'×'}</span></div>`;
       return `<div class="row ${cls} ${isT?'':'l-row'}">
         <input type="checkbox" ${s.on?'checked':''} onchange="toggleItem('${item.id}',this.checked)">
-        ${nameEl}${compSel}${qtyEl}${modsEl}${impEl}
+        <div class="item-name ${s.on?'on':''}">${item.n}${item.fixed!==undefined?`<span class="fixed-badge"> (fijo: ${item.fixed})</span>`:''}</div>
+        ${compSel}${qtyEl}
+        <div class="mods ${s.on&&mods>0?'on':''}">${s.on&&mods>0?fmtM(mods):'—'}</div>
+        <div class="importe ${s.on&&mods>0?(isT?'t':'l'):''}">${s.on&&mods>0?fmt(mods*me):'—'}</div>
       </div>`;
     }).join('');
     return `<div class="group">
-      <div class="group-head ${sec}" onclick="toggleGroup('${g.gid}')">
-        <span>${g.name}</span><span>${isOpen?'▲':'▼'}</span>
-      </div>
+      <div class="group-head ${sec}" onclick="toggleGroup('${g.gid}')"><span>${g.name}</span><span>${isOpen?'▲':'▼'}</span></div>
       <div class="group-body ${isOpen?'open':''}" id="gb-${g.gid}">
         <div class="col-headers" style="background:${isT?'#EEF6FF':'#F0FAE8'};border-top:0.5px solid #eee">
           <div></div><div>Tarea</div><div>Complejidad</div>
           <div style="text-align:center">Cant./hs.</div>
           <div style="text-align:right">Módulos</div>
           <div style="text-align:right">Importe</div>
-        </div>
-        ${rows}
-      </div>
-    </div>`;
+        </div>${rows}
+      </div></div>`;
   }).join('');
 }
 
 function renderHoras(){
-  const me = modEfectivo();
-  document.getElementById('hora-rows').innerHTML = ROLES.map((r,idx)=>{
-    const hs = parseFloat(horas[r.id])||0;
-    const mods = hs * r.modsH;
-    const cls = hs>0?'checked-h':(idx%2===0?'even':'odd');
+  const me=modEfectivo();
+  document.getElementById('hora-rows').innerHTML=ROLES.map((r,idx)=>{
+    const hs=parseFloat(horas[r.id])||0;
+    const mods=hs*r.modsH;
+    const cls=hs>0?'checked-h':(idx%2===0?'even':'odd');
     return `<div class="hora-row ${cls}">
       <div><div class="role-label ${hs>0?'on':''}">${r.label}</div><div class="role-desc">${r.desc}</div></div>
       <div class="mods-hora">${r.modsH} mód/h<small>${fmt(r.modsH*me)}/h</small></div>
-      <div class="hora-input">
-        <input type="number" min="0" step="0.5" value="${horas[r.id]||''}" placeholder="0"
-          style="width:60px;text-align:center"
-          oninput="updateHoras('${r.id}',this.value)">
-      </div>
+      <div class="hora-input"><input type="number" min="0" step="0.5" value="${horas[r.id]||''}" placeholder="0" style="width:60px;text-align:center" oninput="updateHoras('${r.id}',this.value)"></div>
       <div class="mods ${hs>0?'on':''}">${hs>0?fmtM(mods):'—'}</div>
       <div class="importe ${hs>0?'h':''}">${hs>0?fmt(mods*me):'—'}</div>
     </div>`;
@@ -342,96 +379,117 @@ function renderHoras(){
 }
 
 function updateTotals(){
-  const me = modEfectivo();
-  let tribM=0, labM=0;
-  DATA.t.forEach(g=>g.items.forEach(it=>{ tribM+=getMods(it,sel[it.id]); }));
-  DATA.l.forEach(g=>g.items.forEach(it=>{ labM+=getMods(it,sel[it.id]); }));
-  const horasM = ROLES.reduce((a,r)=>a+(parseFloat(horas[r.id])||0)*r.modsH,0);
-  const total = tribM+labM+horasM;
-
-  document.getElementById('badge-t').textContent = tribM>0?fmt(tribM*me):'$0';
-  document.getElementById('badge-l').textContent = labM>0?fmt(labM*me):'$0';
-  document.getElementById('total-amount').textContent = fmt(total*me);
-  document.getElementById('total-mods').textContent = fmtM(total)+' módulos totales';
-  document.getElementById('total-sub').textContent =
-    `Tributario: ${fmtM(tribM)} mód. · Laboral: ${fmtM(labM)} mód. · Horas: ${fmtM(horasM)} mód.`;
-
-  const tmEl = document.getElementById('total-markup');
-  if(markup>0){
-    tmEl.style.display='block';
-    tmEl.textContent=`Módulo efectivo con mark-up ${markup}%: ${fmt(me)}`;
-  } else { tmEl.style.display='none'; }
-
-  const mebar = document.getElementById('modulo-efectivo-bar');
-  const mkbox = document.getElementById('markup-box');
+  const me=modEfectivo();
+  let tribM=0,labM=0;
+  DATA.t.forEach(g=>g.items.forEach(it=>{tribM+=getMods(it,sel[it.id]);}));
+  DATA.l.forEach(g=>g.items.forEach(it=>{labM+=getMods(it,sel[it.id]);}));
+  const horasM=ROLES.reduce((a,r)=>a+(parseFloat(horas[r.id])||0)*r.modsH,0);
+  const total=tribM+labM+horasM;
+  document.getElementById('badge-t').textContent=tribM>0?fmt(tribM*me):'$0';
+  document.getElementById('badge-l').textContent=labM>0?fmt(labM*me):'$0';
+  document.getElementById('total-amount').textContent=fmt(total*me);
+  document.getElementById('total-mods').textContent=fmtM(total)+' módulos totales';
+  document.getElementById('total-sub').textContent=`Tributario: ${fmtM(tribM)} mód. · Laboral: ${fmtM(labM)} mód. · Horas: ${fmtM(horasM)} mód.`;
+  const tmEl=document.getElementById('total-markup');
+  if(markup>0){tmEl.style.display='block';tmEl.textContent=`Módulo efectivo con mark-up ${markup}%: ${fmt(me)}`;}
+  else tmEl.style.display='none';
+  const mebar=document.getElementById('modulo-efectivo-bar');
+  const mkbox=document.getElementById('markup-box');
   if(markup>0){
     mebar.style.display='block';
     mebar.innerHTML=`<strong>Módulo efectivo:</strong> ${fmt(modulo)} × ${(1+markup/100).toFixed(2)} = <strong>${fmt(me)}</strong> por módulo`;
     mkbox.classList.add('markup');
-  } else {
-    mebar.style.display='none';
-    mkbox.classList.remove('markup');
+  } else {mebar.style.display='none';mkbox.classList.remove('markup');}
+}
+
+function render(){renderSection('t');renderSection('l');renderHoras();updateTotals();}
+
+// ── PDF ──────────────────────────────────────────────────────────────
+function generarPDF(){
+  const me=modEfectivo();
+  const cliente=document.getElementById('d-cliente').value||'—';
+  const periodoRaw=document.getElementById('d-periodo').value;
+  let periodo='—';
+  if(periodoRaw){const[y,m]=periodoRaw.split('-');const meses=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];periodo=meses[parseInt(m)-1]+' '+y;}
+  const notas=document.getElementById('d-notas').value;
+  const hoy=new Date().toLocaleDateString('es-AR',{day:'2-digit',month:'long',year:'numeric'});
+
+  // Armar filas por sección
+  function secRows(sec){
+    let rows=[];
+    DATA[sec].forEach(g=>{
+      g.items.forEach(it=>{
+        const s=sel[it.id];
+        if(!s||!s.on)return;
+        const mods=getMods(it,s);
+        if(mods<=0)return;
+        const comp=it.fixed!==undefined?'Fijo':(it.byHour?compLabel(s.comp||'m')+' ('+((s.qty||1))+' hs)':compLabel(s.comp||'m')+(s.qty>1?' ×'+s.qty:''));
+        rows.push({n:it.n,comp,mods,imp:mods*me});
+      });
+    });
+    return rows;
   }
+  const tribRows=secRows('t');
+  const labRows=secRows('l');
+  const horaRows=ROLES.filter(r=>(parseFloat(horas[r.id])||0)>0).map(r=>{
+    const hs=parseFloat(horas[r.id]);const mods=hs*r.modsH;
+    return{n:r.label,comp:hs+' hs',mods,imp:mods*me};
+  });
+
+  let tribM=0,labM=0,horasM=0;
+  tribRows.forEach(r=>tribM+=r.mods);
+  labRows.forEach(r=>labM+=r.mods);
+  horaRows.forEach(r=>horasM+=r.mods);
+  const totalM=tribM+labM+horasM;
+
+  function buildTable(rows,cls){
+    if(!rows.length)return '<p style="font-size:11px;color:#aaa;padding:6px 10px">Sin ítems seleccionados.</p>';
+    return `<table class="rpt-table">
+      <thead><tr><th>Tarea</th><th>Detalle</th><th>Módulos</th><th>Importe</th></tr></thead>
+      <tbody>${rows.map(r=>`<tr><td>${r.n}</td><td>${r.comp}</td><td style="text-align:right">${fmtM(r.mods)}</td><td>${fmt(r.imp)}</td></tr>`).join('')}</tbody>
+    </table>`;
+  }
+
+  const modInfo=markup>0?`Módulo base: ${fmt(modulo)} · Mark-up: ${markup}% · Módulo efectivo: ${fmt(me)}`:`Módulo: ${fmt(modulo)}`;
+
+  document.getElementById('print-report').innerHTML=`
+  <div class="rpt">
+    <div class="rpt-logo">
+      <div>
+        <h1>San Miguel Contadores</h1>
+        <div class="sub">Informe interno de honorarios profesionales</div>
+        <div class="sub" style="margin-top:2px;font-size:10px">${modInfo}</div>
+      </div>
+      <div class="fecha">Fecha: ${hoy}</div>
+    </div>
+    <div class="rpt-datos">
+      <div class="field"><label>Cliente</label><p>${cliente}</p></div>
+      <div class="field"><label>Período</label><p>${periodo}</p></div>
+    </div>
+    ${tribRows.length?`<div class="rpt-section"><h3 class="t">Tributario</h3>${buildTable(tribRows,'t')}</div>`:''}
+    ${labRows.length?`<div class="rpt-section"><h3 class="l">Laboral y previsional</h3>${buildTable(labRows,'l')}</div>`:''}
+    ${horaRows.length?`<div class="rpt-section"><h3 class="h">Valor hora – tareas no especificadas</h3>${buildTable(horaRows,'h')}</div>`:''}
+    <div class="rpt-total">
+      <div><div class="lbl">Total honorarios estimados</div><div class="lbl">${fmtM(totalM)} módulos · Sin IVA</div></div>
+      <div><div class="amt">${fmt(totalM*me)}</div><div class="sub2">Valores orientativos · Res. CD 63/2007 CPCECABA</div></div>
+    </div>
+    ${notas?`<div class="rpt-notas"><label>Notas y observaciones</label><p>${notas.replace(/\n/g,'<br>')}</p></div>`:''}
+    <div class="rpt-footer">San Miguel Contadores · Informe de uso interno · Generado el ${hoy}</div>
+  </div>`;
+
+  window.print();
 }
 
-function render(){
-  renderSection('t');
-  renderSection('l');
-  renderHoras();
-  updateTotals();
-}
-
-// ── EVENTOS ───────────────────────────────────────────────────────────
-function toggleItem(id, checked){
-  if(!sel[id]) sel[id]={on:false,comp:'m',qty:1};
-  sel[id].on=checked;
-  render();
-}
-function updateSel(id, key, val){
-  if(!sel[id]) sel[id]={on:true,comp:'m',qty:1};
-  sel[id][key]=val;
-  render();
-}
-function updateHoras(id, val){
-  horas[id]=parseFloat(val)||0;
-  renderHoras();
-  updateTotals();
-}
-function toggleGroup(gid){
-  openGroups[gid]=!openGroups[gid];
-  render();
-}
-function toggleGH(){
-  ghOpen=!ghOpen;
-  document.getElementById('body-gh').className='group-body'+(ghOpen?' open':'');
-  document.getElementById('arrow-gh').textContent=ghOpen?'▲':'▼';
-}
-function switchTab(t){
-  activeTab=t;
-  document.getElementById('section-t').style.display=t==='t'?'':'none';
-  document.getElementById('section-l').style.display=t==='l'?'':'none';
-  document.getElementById('tab-t').className='tab'+(t==='t'?' active-t':'');
-  document.getElementById('tab-l').className='tab'+(t==='l'?' active-l':'');
-}
-function onModulo(v){
-  const n=parseFloat(v.replace(/\./g,'').replace(',','.'));
-  if(!isNaN(n)&&n>0){ modulo=n; render(); }
-}
-function onMarkup(v){
-  const n=parseFloat(v.replace(',','.'));
-  if(!isNaN(n)&&n>=0){ markup=n; render(); }
-}
-function clearAll(){
-  sel={};
-  horas={jr:0,sr:0,socio:0};
-  render();
-}
-
-// ── INIT ──────────────────────────────────────────────────────────────
-function init(){
-  [...DATA.t,...DATA.l].forEach(g=>{ openGroups[g.gid]=true; });
-  render();
-}
+function toggleItem(id,checked){if(!sel[id])sel[id]={on:false,comp:'m',qty:1};sel[id].on=checked;render();}
+function updateSel(id,key,val){if(!sel[id])sel[id]={on:true,comp:'m',qty:1};sel[id][key]=val;render();}
+function updateHoras(id,val){horas[id]=parseFloat(val)||0;renderHoras();updateTotals();}
+function toggleGroup(gid){openGroups[gid]=!openGroups[gid];render();}
+function toggleGH(){ghOpen=!ghOpen;document.getElementById('body-gh').className='group-body'+(ghOpen?' open':'');document.getElementById('arrow-gh').textContent=ghOpen?'▲':'▼';}
+function switchTab(t){activeTab=t;document.getElementById('section-t').style.display=t==='t'?'':'none';document.getElementById('section-l').style.display=t==='l'?'':'none';document.getElementById('tab-t').className='tab'+(t==='t'?' active-t':'');document.getElementById('tab-l').className='tab'+(t==='l'?' active-l':'');}
+function onModulo(v){const n=parseFloat(v.replace(/\./g,'').replace(',','.'));if(!isNaN(n)&&n>0){modulo=n;render();}}
+function onMarkup(v){const n=parseFloat(v.replace(',','.'));if(!isNaN(n)&&n>=0){markup=n;render();}}
+function clearAll(){sel={};horas={jr:0,sr:0,socio:0};render();}
+function init(){[...DATA.t,...DATA.l].forEach(g=>{openGroups[g.gid]=true;});render();}
 </script>
 </body>
 </html>
