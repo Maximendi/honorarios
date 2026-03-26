@@ -1,0 +1,453 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2685.4">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="es"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1">&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1">&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p1">&lt;title&gt;Honorarios – San Miguel Contadores&lt;/title&gt;</p>
+<p class="p1">&lt;style&gt;</p>
+<p class="p1">*{box-sizing:border-box;margin:0;padding:0}</p>
+<p class="p1">body{font-family:system-ui,sans-serif;font-size:13px;background:#f0f0ee;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:16px}</p>
+<p class="p1">#login-screen{background:#fff;border-radius:12px;border:0.5px solid #ddd;padding:40px 36px;width:100%;max-width:360px;margin-top:60px;text-align:center}</p>
+<p class="p1">#login-screen h2{font-size:18px;font-weight:600;margin-bottom:6px}</p>
+<p class="p1">#login-screen p{font-size:12px;color:#888;margin-bottom:24px}</p>
+<p class="p1">#login-screen input{width:100%;padding:10px 14px;border:0.5px solid #ccc;border-radius:8px;font-size:14px;outline:none;margin-bottom:12px;text-align:center;letter-spacing:2px}</p>
+<p class="p1">#login-screen button{width:100%;padding:10px;background:#185FA5;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer}</p>
+<p class="p1">#login-screen button:hover{background:#0C447C}</p>
+<p class="p1">#login-screen .error{color:#c0392b;font-size:12px;margin-top:8px}</p>
+<p class="p1">#app{display:none;width:100%;max-width:860px}</p>
+<p class="p1">.header{background:#f5f5f3;border:0.5px solid #ddd;border-radius:10px;padding:12px 16px;margin-bottom:10px}</p>
+<p class="p1">.header-top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}</p>
+<p class="p1">.header h1{font-size:14px;font-weight:600}</p>
+<p class="p1">.header p{font-size:11px;color:#888;margin-top:2px}</p>
+<p class="p1">.header-inputs{display:flex;gap:10px;flex-wrap:wrap;align-items:center}</p>
+<p class="p1">.input-box{display:flex;align-items:center;gap:8px;background:#fff;border:0.5px solid #ccc;border-radius:8px;padding:6px 12px}</p>
+<p class="p1">.input-box label{font-size:11px;color:#888;white-space:nowrap}</p>
+<p class="p1">.input-box input{border:none;border-bottom:1.5px solid #378ADD;background:transparent;font-size:14px;font-weight:600;color:#185FA5;outline:none;text-align:right;padding:2px 0;width:82px}</p>
+<p class="p1">.input-box.markup input{border-bottom-color:#EF9F27;color:#854F0B}</p>
+<p class="p1">.input-box.markup{border-color:#EF9F27;background:#FFF8EC}</p>
+<p class="p1">.modulo-efectivo{margin-top:8px;padding:6px 10px;background:#FFF0CC;border-radius:6px;font-size:12px;color:#854F0B}</p>
+<p class="p1">.tabs{display:flex;gap:8px;margin-bottom:10px}</p>
+<p class="p1">.tab{flex:1;padding:9px 14px;border-radius:8px;border:0.5px solid #ddd;background:#fff;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-size:13px;color:#555}</p>
+<p class="p1">.tab.active-t{background:#E6F1FB;border:1.5px solid #85B7EB;color:#0C447C;font-weight:600}</p>
+<p class="p1">.tab.active-l{background:#EAF3DE;border:1.5px solid #97C459;color:#27500A;font-weight:600}</p>
+<p class="p1">.tab-badge{font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;background:#eee;color:#777}</p>
+<p class="p1">.tab.active-t .tab-badge{background:#B5D4F4;color:#0C447C}</p>
+<p class="p1">.tab.active-l .tab-badge{background:#C0DD97;color:#27500A}</p>
+<p class="p1">.col-headers{display:grid;grid-template-columns:24px 1fr 90px 74px 72px 102px;gap:6px;padding:4px 12px;font-size:10px;color:#999;font-weight:600;text-transform:uppercase;letter-spacing:.05em}</p>
+<p class="p1">.col-headers.hora-cols{grid-template-columns:1fr 112px 92px 90px 110px}</p>
+<p class="p1">.group{margin-bottom:8px;border:0.5px solid #ddd;border-radius:8px;overflow:hidden}</p>
+<p class="p1">.group-head{padding:8px 12px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-weight:500;font-size:12px}</p>
+<p class="p1">.group-head.t{background:#E6F1FB;color:#0C447C}</p>
+<p class="p1">.group-head.l{background:#EAF3DE;color:#27500A}</p>
+<p class="p1">.group-head.h{background:#F3EEFB;color:#4A2D8A}</p>
+<p class="p1">.group-body{display:none}</p>
+<p class="p1">.group-body.open{display:block}</p>
+<p class="p1">.row{display:grid;grid-template-columns:24px 1fr 90px 74px 72px 102px;gap:6px;align-items:center;padding:7px 12px;border-top:0.5px solid #eee}</p>
+<p class="p1">.row.even{background:#fff}</p>
+<p class="p1">.row.odd{background:#fafaf8}</p>
+<p class="p1">.row.checked-t{background:#EEF6FF}</p>
+<p class="p1">.row.checked-l{background:#F0FAE8}</p>
+<p class="p1">.row.checked-h{background:#F7F0FF}</p>
+<p class="p1">.row input[type=checkbox]{cursor:pointer;accent-color:#378ADD;width:15px;height:15px}</p>
+<p class="p1">.row.l-row input[type=checkbox]{accent-color:#639922}</p>
+<p class="p1">.item-name{font-size:12px;color:#555}</p>
+<p class="p1">.item-name.on{color:#111;font-weight:500}</p>
+<p class="p1">.fixed-badge{font-size:10px;color:#aaa;font-weight:400}</p>
+<p class="p1">select,input[type=number]{font-size:12px;padding:3px 5px;border-radius:5px;border:0.5px solid #ccc;background:#fff;outline:none}</p>
+<p class="p1">select:disabled,input[type=number]:disabled{opacity:.35;cursor:not-allowed}</p>
+<p class="p1">.mods{text-align:right;font-size:12px;color:#bbb;font-weight:400}</p>
+<p class="p1">.mods.on{color:#111;font-weight:600}</p>
+<p class="p1">.importe{text-align:right;font-size:12px;font-weight:600;color:#ccc}</p>
+<p class="p1">.importe.t{color:#185FA5}</p>
+<p class="p1">.importe.l{color:#3B6D11}</p>
+<p class="p1">.importe.h{color:#4A2D8A}</p>
+<p class="p1">.hora-row{display:grid;grid-template-columns:1fr 112px 92px 90px 110px;gap:6px;align-items:center;padding:8px 12px;border-top:0.5px solid #eee}</p>
+<p class="p1">.role-label{font-size:12px;font-weight:400;color:#444}</p>
+<p class="p1">.role-label.on{font-weight:600;color:#4A2D8A}</p>
+<p class="p1">.role-desc{font-size:10px;color:#aaa}</p>
+<p class="p1">.mods-hora{text-align:center;font-size:12px;color:#7B5EA7;font-weight:500}</p>
+<p class="p1">.mods-hora small{display:block;font-size:10px;color:#aaa;font-weight:400}</p>
+<p class="p1">.hora-input{text-align:center}</p>
+<p class="p1">.total-bar{background:#f5f5f3;border:0.5px solid #ccc;border-radius:10px;padding:14px 18px;margin-top:8px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}</p>
+<p class="p1">.total-label{font-size:10px;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:.05em}</p>
+<p class="p1">.total-sub{font-size:11px;color:#aaa;margin-top:4px}</p>
+<p class="p1">.total-markup{font-size:11px;color:#854F0B;margin-top:3px}</p>
+<p class="p1">.clear-btn{margin-top:8px;font-size:11px;padding:4px 10px;cursor:pointer;border:0.5px solid #ccc;background:#fff;border-radius:6px;color:#666}</p>
+<p class="p1">.total-amount{font-size:26px;font-weight:700;color:#111;text-align:right}</p>
+<p class="p1">.total-note{font-size:10px;color:#aaa;margin-top:3px;text-align:right}</p>
+<p class="p1">.total-mods{font-size:11px;color:#aaa;margin-bottom:2px;text-align:right}</p>
+<p class="p1">&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;!-- LOGIN --&gt;</p>
+<p class="p1">&lt;div id="login-screen"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;h2&gt;San Miguel Contadores&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;p&gt;Calculadora de honorarios profesionales&lt;br&gt;Ingresá la contraseña para continuar&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;input type="password" id="pwd-input" placeholder="Contraseña" onkeydown="if(event.key==='Enter')checkPwd()"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;button onclick="checkPwd()"&gt;Ingresar&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="error" id="pwd-error"&gt;&lt;/div&gt;</p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;!-- APP --&gt;</p>
+<p class="p1">&lt;div id="app"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="header"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="header-top"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;h1&gt;Calculadora de honorarios profesionales&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;p&gt;CPCECABA · Res. C.D. Nº 63/2007 · Tributario y Laboral/Previsional&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="header-inputs"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="input-box"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label&gt;Módulo $&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;input type="text" id="mod-input" value="13.287" oninput="onModulo(this.value)"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="input-box" id="markup-box"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label&gt;Mark-up %&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;input type="text" id="markup-input" value="0" oninput="onMarkup(this.value)"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="modulo-efectivo-bar" style="display:none" class="modulo-efectivo"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="tabs"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="tab active-t" id="tab-t" onclick="switchTab('t')"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;span&gt;Tributario&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;span class="tab-badge" id="badge-t"&gt;$0&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="tab" id="tab-l" onclick="switchTab('l')"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;span&gt;Laboral y previsional&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;span class="tab-badge" id="badge-l"&gt;$0&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div id="section-t"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div id="section-l" style="display:none"&gt;&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;!-- VALOR HORA --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="group" id="group-hora"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="group-head h" onclick="toggleGH()"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;span&gt;Valor hora por categoría — tareas no especificadas (Res. 63/2007 §3.2)&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;span id="arrow-gh"&gt;▲&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="group-body open" id="body-gh"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="col-headers hora-cols" style="background:#faf8ff;border-top:0.5px solid #eee"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div&gt;Categoría&lt;/div&gt;&lt;div style="text-align:center"&gt;Mód/hora&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div style="text-align:center"&gt;Hs. estimadas&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div style="text-align:right"&gt;Módulos&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div style="text-align:right"&gt;Importe&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div id="hora-rows"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="total-bar"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="total-label"&gt;Total presupuesto&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="total-sub" id="total-sub"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="total-markup" id="total-markup" style="display:none"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="clear-btn" onclick="clearAll()"&gt;Limpiar selección&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="total-mods" id="total-mods"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="total-amount" id="total-amount"&gt;$0&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="total-note"&gt;Sin IVA · Valores orientativos (Res. 63/2007)&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;script&gt;</p>
+<p class="p1">// ── AUTH ──────────────────────────────────────────────────────────────</p>
+<p class="p1">const PWD = "SanMiguel2026!";</p>
+<p class="p1">function checkPwd(){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const v = document.getElementById('pwd-input').value;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(v === PWD){</p>
+<p class="p1"><span class="Apple-converted-space">    </span>document.getElementById('login-screen').style.display='none';</p>
+<p class="p1"><span class="Apple-converted-space">    </span>document.getElementById('app').style.display='block';</p>
+<p class="p1"><span class="Apple-converted-space">    </span>init();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>document.getElementById('pwd-error').textContent='Contraseña incorrecta. Intentá de nuevo.';</p>
+<p class="p1"><span class="Apple-converted-space">    </span>document.getElementById('pwd-input').value='';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">// ── DATOS ─────────────────────────────────────────────────────────────</p>
+<p class="p1">const DATA = {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>t:[</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{gid:"g1", name:"Liquidación mensual de impuestos", items:[</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{id:"iibb_loc", n:"Ingresos Brutos Locales", a:15, m:10, b:7},</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{id:"iibb_cm",<span class="Apple-converted-space">  </span>n:"IIBB – Convenio Multilateral", a:20, m:12, b:10},</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{id:"sicore", <span class="Apple-converted-space">  </span>n:"SI.CO.RE.", a:20, m:12, b:10},</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{id:"iva",<span class="Apple-converted-space">      </span>n:"I.V.A.", a:15, m:10, b:7},</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{id:"ret_loc",<span class="Apple-converted-space">  </span>n:"Retención y Percepción Locales", a:20, m:12, b:10},</p>
+<p class="p1"><span class="Apple-converted-space">    </span>]},</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{gid:"g2", name:"Liquidación anual de impuestos", items:[</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{id:"gcias_pf", n:"Ganancias – Personas Físicas", a:80, m:50, b:30},</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{id:"bp", <span class="Apple-converted-space">      </span>n:"Bienes Personales", a:35, m:20, b:15},</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{id:"bp_acc", <span class="Apple-converted-space">  </span>n:"Bienes Personales – Acciones y Part. Soc.", a:20, m:15, b:10},</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{id:"gcias_pj", n:"Ganancias – Personas Jurídicas", a:55, m:35, b:25},</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{id:"gmp",<span class="Apple-converted-space">      </span>n:"Ganancia Mínima Presunta", a:40, m:25, b:15},</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{id:"iibb_a", <span class="Apple-converted-space">  </span>n:"Ingresos Brutos Locales (anual)", a:25, m:20, b:15},</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{id:"cm_a", <span class="Apple-converted-space">    </span>n:"Convenio Multilateral (anual)", a:55, m:30, b:20},</p>
+<p class="p1"><span class="Apple-converted-space">    </span>]},</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{gid:"g3", name:"Regímenes de información", items:[</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{id:"reginfo", n:"CITI Ventas/Compras, SITER, etc.", fixed:15},</p>
+<p class="p1"><span class="Apple-converted-space">    </span>]},</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{gid:"g4", name:"Inspecciones y requerimientos", items:[</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{id:"insp_t", n:"Por hora profesional (mín. 30 mód.)", a:27, m:20, b:13, byHour:true},</p>
+<p class="p1"><span class="Apple-converted-space">    </span>]},</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{gid:"g5", name:"Inscripciones en AFIP", items:[</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{id:"inscr_afip", n:"Alta / Baja en AFIP", a:27, m:20, b:13},</p>
+<p class="p1"><span class="Apple-converted-space">    </span>]},</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{gid:"g6", name:"Actividades específicas (Res. 35/2022)", items:[</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{id:"mono_recat", n:"Recategorización Monotributistas", a:10, m:8, b:6},</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{id:"iibb_recat", n:"Recategorización IIBB CABA", a:10, m:8, b:6},</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{id:"reli", <span class="Apple-converted-space">      </span>n:"RELI – Registro contratos de locación", a:11, m:8, b:5},</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{id:"censo",<span class="Apple-converted-space">      </span>n:"Censo Nacional Económico (INDEC)", a:15, m:11, b:5},</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{id:"ceta", <span class="Apple-converted-space">      </span>n:"CETA – Transferencia de Automotores", fixed:4},</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{id:"coti", <span class="Apple-converted-space">      </span>n:"COTI – Transferencia de Inmuebles", fixed:4},</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{id:"bcumpl", <span class="Apple-converted-space">    </span>n:"Beneficio Cumplidor sin Disconformidad", fixed:4},</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{id:"condo",<span class="Apple-converted-space">      </span>n:"Condonación de Deuda sin Disconformidad", fixed:6},</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{id:"dev_perc", <span class="Apple-converted-space">  </span>n:"Devolución Percepciones – No Inscriptos", fixed:7},</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{id:"f572", <span class="Apple-converted-space">      </span>n:"Formulario 572 / SIRADIG", a:20, m:12, b:8},</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{id:"plan_pago",<span class="Apple-converted-space">  </span>n:"Plan de Pagos", a:16, m:11, b:8},</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{id:"iti",<span class="Apple-converted-space">        </span>n:"ITI – Transferencia de Inmuebles (web)", a:15, m:10, b:6},</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{id:"empadron", <span class="Apple-converted-space">  </span>n:"Empadronamiento Empleadores CABA", a:20, m:12, b:8},</p>
+<p class="p1"><span class="Apple-converted-space">    </span>]},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>],</p>
+<p class="p1"><span class="Apple-converted-space">  </span>l:[</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{gid:"g7", name:"Liquidación mensual sueldos y cargas sociales", items:[</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{id:"sue_10",<span class="Apple-converted-space">  </span>n:"Hasta 10 empleados", fixed:15},</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{id:"sue_40",<span class="Apple-converted-space">  </span>n:"De 11 a 40 empleados", fixed:30},</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{id:"sue_80",<span class="Apple-converted-space">  </span>n:"De 41 a 80 empleados", fixed:45},</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{id:"sue_160", n:"De 81 a 160 empleados", fixed:65},</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{id:"sue_mas", n:"Más de 160 empleados", fixed:85},</p>
+<p class="p1"><span class="Apple-converted-space">    </span>]},</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{gid:"g8", name:"Inscripciones y trámites previsionales", items:[</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{id:"afip_empl", <span class="Apple-converted-space">  </span>n:"Inscripción AFIP – Empleador", fixed:30},</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{id:"asig_as", <span class="Apple-converted-space">    </span>n:"Asesoramiento reintegro asignaciones familiares", fixed:10},</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{id:"asig_tr", <span class="Apple-converted-space">    </span>n:"Certificación y trámite reintegro asignaciones", fixed:20},</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{id:"deudas_prev", n:"Det. deudas/créditos previsionales (por año/afiliado)", fixed:20},</p>
+<p class="p1"><span class="Apple-converted-space">    </span>]},</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{gid:"g9", name:"Inspecciones y requerimientos laborales", items:[</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{id:"insp_l", n:"Por caso (mínimo 30 módulos)", fixed:30},</p>
+<p class="p1"><span class="Apple-converted-space">    </span>]},</p>
+<p class="p1"><span class="Apple-converted-space">    </span>{gid:"g10", name:"Otros", items:[</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{id:"sicam", <span class="Apple-converted-space">  </span>n:"Liquidación aportes autónomos – SICAM", fixed:10},</p>
+<p class="p1"><span class="Apple-converted-space">      </span>{id:"rubrica", n:"Asesoramiento rúbrica de libros (GCBA)", fixed:10},</p>
+<p class="p1"><span class="Apple-converted-space">    </span>]},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>]</p>
+<p class="p1">};</p>
+<p class="p2"><br></p>
+<p class="p1">const ROLES = [</p>
+<p class="p1"><span class="Apple-converted-space">  </span>{id:"jr",<span class="Apple-converted-space">    </span>label:"Analista Jr.",<span class="Apple-converted-space">  </span>modsH:2.5, desc:"Bajo valor agregado"},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>{id:"sr",<span class="Apple-converted-space">    </span>label:"Analista Sr.",<span class="Apple-converted-space">  </span>modsH:5, <span class="Apple-converted-space">  </span>desc:"Medio valor agregado"},</p>
+<p class="p1"><span class="Apple-converted-space">  </span>{id:"socio", label:"Socio", <span class="Apple-converted-space">        </span>modsH:7, <span class="Apple-converted-space">  </span>desc:"Alto valor agregado"},</p>
+<p class="p1">];</p>
+<p class="p2"><br></p>
+<p class="p1">// ── ESTADO ────────────────────────────────────────────────────────────</p>
+<p class="p1">let modulo = 13287;</p>
+<p class="p1">let markup = 0;</p>
+<p class="p1">let sel = {};</p>
+<p class="p1">let horas = {jr:0, sr:0, socio:0};</p>
+<p class="p1">let openGroups = {};</p>
+<p class="p1">let ghOpen = true;</p>
+<p class="p1">let activeTab = 't';</p>
+<p class="p2"><br></p>
+<p class="p1">function modEfectivo(){ return modulo * (1 + markup/100); }</p>
+<p class="p1">function fmt(n){ return '$\u00a0' + Math.round(n).toLocaleString('es-AR'); }</p>
+<p class="p1">function fmtM(n){ return n % 1 === 0 ? ''+n : n.toFixed(1); }</p>
+<p class="p2"><br></p>
+<p class="p1">function getMods(item, s){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(!s || !s.on) return 0;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const c = s.comp || 'm', qty = parseFloat(s.qty)||1;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(item.fixed !== undefined) return item.fixed * qty;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const base = item[c] || 0;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(item.byHour) return Math.max(base * qty, 30);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>return base * qty;</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">// ── RENDER ────────────────────────────────────────────────────────────</p>
+<p class="p1">function renderSection(sec){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const el = document.getElementById('section-'+sec);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const isT = sec==='t';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>el.innerHTML = DATA[sec].map(g =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const isOpen = openGroups[g.gid];</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const rows = g.items.map((item,idx) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const s = sel[item.id] || {on:false, comp:'m', qty:1};</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const mods = getMods(item, s);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const me = modEfectivo();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const hasComp = item.fixed===undefined &amp;&amp; !item.byHour;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const isHour = item.byHour;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const cls = s.on ? (isT?'checked-t':'checked-l') : (idx%2===0?'even':'odd');</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const compSel = (hasComp||isHour)</p>
+<p class="p1"><span class="Apple-converted-space">        </span>? `&lt;select onchange="updateSel('${item.id}','comp',this.value)" ${s.on?'':'disabled'}&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;option value="a" ${(s.comp||'m')==='a'?'selected':''}&gt;Alta&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;option value="m" ${(s.comp||'m')==='m'?'selected':''}&gt;Media&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;option value="b" ${(s.comp||'m')==='b'?'selected':''}&gt;Baja&lt;/option&gt;</p>
+<p class="p1"><span class="Apple-converted-space">           </span>&lt;/select&gt;`</p>
+<p class="p1"><span class="Apple-converted-space">        </span>: '&lt;span style="font-size:11px;color:#bbb"&gt;—&lt;/span&gt;';</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const qtyEl = `&lt;div style="display:flex;align-items:center;gap:3px"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;input type="number" min="1" value="${s.qty||1}" ${s.on?'':'disabled'}</p>
+<p class="p1"><span class="Apple-converted-space">          </span>style="width:46px;text-align:center"</p>
+<p class="p1"><span class="Apple-converted-space">          </span>onchange="updateSel('${item.id}','qty',Math.max(1,parseInt(this.value)||1))"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;span style="font-size:10px;color:#aaa"&gt;${isHour?'hs':'×'}&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const modsEl = `&lt;div class="mods ${s.on&amp;&amp;mods&gt;0?'on':''}"&gt;${s.on&amp;&amp;mods&gt;0?fmtM(mods):'—'}&lt;/div&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const impEl<span class="Apple-converted-space">  </span>= `&lt;div class="importe ${s.on&amp;&amp;mods&gt;0?(isT?'t':'l'):''}"&gt;${s.on&amp;&amp;mods&gt;0?fmt(mods*me):'—'}&lt;/div&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const nameEl = `&lt;div class="item-name ${s.on?'on':''}"&gt;${item.n}${item.fixed!==undefined?`&lt;span class="fixed-badge"&gt; (fijo: ${item.fixed})&lt;/span&gt;`:''}&lt;/div&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>return `&lt;div class="row ${cls} ${isT?'':'l-row'}"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;input type="checkbox" ${s.on?'checked':''} onchange="toggleItem('${item.id}',this.checked)"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>${nameEl}${compSel}${qtyEl}${modsEl}${impEl}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}).join('');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>return `&lt;div class="group"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="group-head ${sec}" onclick="toggleGroup('${g.gid}')"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;span&gt;${g.name}&lt;/span&gt;&lt;span&gt;${isOpen?'▲':'▼'}&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="group-body ${isOpen?'open':''}" id="gb-${g.gid}"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="col-headers" style="background:${isT?'#EEF6FF':'#F0FAE8'};border-top:0.5px solid #eee"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div&gt;&lt;/div&gt;&lt;div&gt;Tarea&lt;/div&gt;&lt;div&gt;Complejidad&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div style="text-align:center"&gt;Cant./hs.&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div style="text-align:right"&gt;Módulos&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;div style="text-align:right"&gt;Importe&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>${rows}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}).join('');</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function renderHoras(){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const me = modEfectivo();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('hora-rows').innerHTML = ROLES.map((r,idx)=&gt;{</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const hs = parseFloat(horas[r.id])||0;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const mods = hs * r.modsH;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const cls = hs&gt;0?'checked-h':(idx%2===0?'even':'odd');</p>
+<p class="p1"><span class="Apple-converted-space">    </span>return `&lt;div class="hora-row ${cls}"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div&gt;&lt;div class="role-label ${hs&gt;0?'on':''}"&gt;${r.label}&lt;/div&gt;&lt;div class="role-desc"&gt;${r.desc}&lt;/div&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="mods-hora"&gt;${r.modsH} mód/h&lt;small&gt;${fmt(r.modsH*me)}/h&lt;/small&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="hora-input"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;input type="number" min="0" step="0.5" value="${horas[r.id]||''}" placeholder="0"</p>
+<p class="p1"><span class="Apple-converted-space">          </span>style="width:60px;text-align:center"</p>
+<p class="p1"><span class="Apple-converted-space">          </span>oninput="updateHoras('${r.id}',this.value)"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="mods ${hs&gt;0?'on':''}"&gt;${hs&gt;0?fmtM(mods):'—'}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="importe ${hs&gt;0?'h':''}"&gt;${hs&gt;0?fmt(mods*me):'—'}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}).join('');</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function updateTotals(){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const me = modEfectivo();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>let tribM=0, labM=0;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>DATA.t.forEach(g=&gt;g.items.forEach(it=&gt;{ tribM+=getMods(it,sel[it.id]); }));</p>
+<p class="p1"><span class="Apple-converted-space">  </span>DATA.l.forEach(g=&gt;g.items.forEach(it=&gt;{ labM+=getMods(it,sel[it.id]); }));</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const horasM = ROLES.reduce((a,r)=&gt;a+(parseFloat(horas[r.id])||0)*r.modsH,0);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const total = tribM+labM+horasM;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('badge-t').textContent = tribM&gt;0?fmt(tribM*me):'$0';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('badge-l').textContent = labM&gt;0?fmt(labM*me):'$0';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('total-amount').textContent = fmt(total*me);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('total-mods').textContent = fmtM(total)+' módulos totales';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('total-sub').textContent =</p>
+<p class="p1"><span class="Apple-converted-space">    </span>`Tributario: ${fmtM(tribM)} mód. · Laboral: ${fmtM(labM)} mód. · Horas: ${fmtM(horasM)} mód.`;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>const tmEl = document.getElementById('total-markup');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(markup&gt;0){</p>
+<p class="p1"><span class="Apple-converted-space">    </span>tmEl.style.display='block';</p>
+<p class="p1"><span class="Apple-converted-space">    </span>tmEl.textContent=`Módulo efectivo con mark-up ${markup}%: ${fmt(me)}`;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>} else { tmEl.style.display='none'; }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>const mebar = document.getElementById('modulo-efectivo-bar');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const mkbox = document.getElementById('markup-box');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(markup&gt;0){</p>
+<p class="p1"><span class="Apple-converted-space">    </span>mebar.style.display='block';</p>
+<p class="p1"><span class="Apple-converted-space">    </span>mebar.innerHTML=`&lt;strong&gt;Módulo efectivo:&lt;/strong&gt; ${fmt(modulo)} × ${(1+markup/100).toFixed(2)} = &lt;strong&gt;${fmt(me)}&lt;/strong&gt; por módulo`;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>mkbox.classList.add('markup');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>mebar.style.display='none';</p>
+<p class="p1"><span class="Apple-converted-space">    </span>mkbox.classList.remove('markup');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function render(){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>renderSection('t');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>renderSection('l');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>renderHoras();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>updateTotals();</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">// ── EVENTOS ───────────────────────────────────────────────────────────</p>
+<p class="p1">function toggleItem(id, checked){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(!sel[id]) sel[id]={on:false,comp:'m',qty:1};</p>
+<p class="p1"><span class="Apple-converted-space">  </span>sel[id].on=checked;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>render();</p>
+<p class="p1">}</p>
+<p class="p1">function updateSel(id, key, val){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(!sel[id]) sel[id]={on:true,comp:'m',qty:1};</p>
+<p class="p1"><span class="Apple-converted-space">  </span>sel[id][key]=val;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>render();</p>
+<p class="p1">}</p>
+<p class="p1">function updateHoras(id, val){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>horas[id]=parseFloat(val)||0;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>renderHoras();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>updateTotals();</p>
+<p class="p1">}</p>
+<p class="p1">function toggleGroup(gid){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>openGroups[gid]=!openGroups[gid];</p>
+<p class="p1"><span class="Apple-converted-space">  </span>render();</p>
+<p class="p1">}</p>
+<p class="p1">function toggleGH(){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>ghOpen=!ghOpen;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('body-gh').className='group-body'+(ghOpen?' open':'');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('arrow-gh').textContent=ghOpen?'▲':'▼';</p>
+<p class="p1">}</p>
+<p class="p1">function switchTab(t){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>activeTab=t;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('section-t').style.display=t==='t'?'':'none';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('section-l').style.display=t==='l'?'':'none';</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('tab-t').className='tab'+(t==='t'?' active-t':'');</p>
+<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById('tab-l').className='tab'+(t==='l'?' active-l':'');</p>
+<p class="p1">}</p>
+<p class="p1">function onModulo(v){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const n=parseFloat(v.replace(/\./g,'').replace(',','.'));</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(!isNaN(n)&amp;&amp;n&gt;0){ modulo=n; render(); }</p>
+<p class="p1">}</p>
+<p class="p1">function onMarkup(v){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>const n=parseFloat(v.replace(',','.'));</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if(!isNaN(n)&amp;&amp;n&gt;=0){ markup=n; render(); }</p>
+<p class="p1">}</p>
+<p class="p1">function clearAll(){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>sel={};</p>
+<p class="p1"><span class="Apple-converted-space">  </span>horas={jr:0,sr:0,socio:0};</p>
+<p class="p1"><span class="Apple-converted-space">  </span>render();</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">// ── INIT ──────────────────────────────────────────────────────────────</p>
+<p class="p1">function init(){</p>
+<p class="p1"><span class="Apple-converted-space">  </span>[...DATA.t,...DATA.l].forEach(g=&gt;{ openGroups[g.gid]=true; });</p>
+<p class="p1"><span class="Apple-converted-space">  </span>render();</p>
+<p class="p1">}</p>
+<p class="p1">&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
