@@ -4,128 +4,523 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Honorarios – San Miguel Contadores</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:system-ui,sans-serif;font-size:13px;background:#f0f0ee;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:16px}
-#login-screen{background:#fff;border-radius:12px;border:0.5px solid #ddd;padding:40px 36px;width:100%;max-width:360px;margin-top:60px;text-align:center}
-#login-screen h2{font-size:18px;font-weight:600;margin-bottom:6px}
-#login-screen p{font-size:12px;color:#888;margin-bottom:24px}
-#login-screen input{width:100%;padding:10px 14px;border:0.5px solid #ccc;border-radius:8px;font-size:14px;outline:none;margin-bottom:12px;text-align:center;letter-spacing:2px}
-#login-screen button{width:100%;padding:10px;background:#185FA5;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer}
-#login-screen button:hover{background:#0C447C}
-#login-screen .error{color:#c0392b;font-size:12px;margin-top:8px}
-#app{display:none;width:100%;max-width:860px}
-.header{background:#f5f5f3;border:0.5px solid #ddd;border-radius:10px;padding:12px 16px;margin-bottom:10px}
-.header-top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
-.header h1{font-size:14px;font-weight:600}
-.header p{font-size:11px;color:#888;margin-top:2px}
-.header-inputs{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-.input-box{display:flex;align-items:center;gap:8px;background:#fff;border:0.5px solid #ccc;border-radius:8px;padding:6px 12px}
-.input-box label{font-size:11px;color:#888;white-space:nowrap}
-.input-box input{border:none;border-bottom:1.5px solid #378ADD;background:transparent;font-size:14px;font-weight:600;color:#185FA5;outline:none;text-align:right;padding:2px 0;width:82px}
-.input-box.markup input{border-bottom-color:#EF9F27;color:#854F0B}
-.input-box.markup{border-color:#EF9F27;background:#FFF8EC}
-.modulo-efectivo{margin-top:8px;padding:6px 10px;background:#FFF0CC;border-radius:6px;font-size:12px;color:#854F0B}
-/* DATOS DEL TRABAJO */
-.trabajo-box{background:#fff;border:0.5px solid #ddd;border-radius:10px;padding:12px 16px;margin-bottom:10px}
-.trabajo-box .tit{font-size:12px;font-weight:600;color:#555;margin-bottom:10px;text-transform:uppercase;letter-spacing:.04em}
-.trabajo-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.trabajo-field{display:flex;flex-direction:column;gap:4px}
-.trabajo-field label{font-size:11px;color:#888}
-.trabajo-field input,.trabajo-field textarea,.trabajo-field select{font-size:13px;padding:6px 10px;border:0.5px solid #ccc;border-radius:6px;background:#fafafa;outline:none;color:#111;font-family:inherit}
-.trabajo-field textarea{resize:vertical;min-height:52px}
-.trabajo-field.full{grid-column:1/-1}
-/* TABS */
-.tabs{display:flex;gap:8px;margin-bottom:10px}
-.tab{flex:1;padding:9px 14px;border-radius:8px;border:0.5px solid #ddd;background:#fff;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-size:13px;color:#555}
-.tab.active-t{background:#E6F1FB;border:1.5px solid #85B7EB;color:#0C447C;font-weight:600}
-.tab.active-l{background:#EAF3DE;border:1.5px solid #97C459;color:#27500A;font-weight:600}
-.tab-badge{font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;background:#eee;color:#777}
-.tab.active-t .tab-badge{background:#B5D4F4;color:#0C447C}
-.tab.active-l .tab-badge{background:#C0DD97;color:#27500A}
-.col-headers{display:grid;grid-template-columns:24px 1fr 90px 74px 72px 102px;gap:6px;padding:4px 12px;font-size:10px;color:#999;font-weight:600;text-transform:uppercase;letter-spacing:.05em}
-.col-headers.hora-cols{grid-template-columns:1fr 112px 92px 90px 110px}
-.group{margin-bottom:8px;border:0.5px solid #ddd;border-radius:8px;overflow:hidden}
-.group-head{padding:8px 12px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-weight:500;font-size:12px}
-.group-head.t{background:#E6F1FB;color:#0C447C}
-.group-head.l{background:#EAF3DE;color:#27500A}
-.group-head.h{background:#F3EEFB;color:#4A2D8A}
-.group-body{display:none}
-.group-body.open{display:block}
-.row{display:grid;grid-template-columns:24px 1fr 90px 74px 72px 102px;gap:6px;align-items:center;padding:7px 12px;border-top:0.5px solid #eee}
-.row.even{background:#fff}.row.odd{background:#fafaf8}
-.row.checked-t{background:#EEF6FF}.row.checked-l{background:#F0FAE8}.row.checked-h{background:#F7F0FF}
-.row input[type=checkbox]{cursor:pointer;accent-color:#378ADD;width:15px;height:15px}
-.row.l-row input[type=checkbox]{accent-color:#639922}
-.item-name{font-size:12px;color:#555}.item-name.on{color:#111;font-weight:500}
-.fixed-badge{font-size:10px;color:#aaa;font-weight:400}
-select,input[type=number]{font-size:12px;padding:3px 5px;border-radius:5px;border:0.5px solid #ccc;background:#fff;outline:none}
-select:disabled,input[type=number]:disabled{opacity:.35;cursor:not-allowed}
-.mods{text-align:right;font-size:12px;color:#bbb}.mods.on{color:#111;font-weight:600}
-.importe{text-align:right;font-size:12px;font-weight:600;color:#ccc}
-.importe.t{color:#185FA5}.importe.l{color:#3B6D11}.importe.h{color:#4A2D8A}
-.hora-row{display:grid;grid-template-columns:1fr 112px 92px 90px 110px;gap:6px;align-items:center;padding:8px 12px;border-top:0.5px solid #eee}
-.role-label{font-size:12px;font-weight:400;color:#444}.role-label.on{font-weight:600;color:#4A2D8A}
-.role-desc{font-size:10px;color:#aaa}
-.mods-hora{text-align:center;font-size:12px;color:#7B5EA7;font-weight:500}
-.mods-hora small{display:block;font-size:10px;color:#aaa;font-weight:400}
-.hora-input{text-align:center}
-.total-bar{background:#f5f5f3;border:0.5px solid #ccc;border-radius:10px;padding:14px 18px;margin-top:8px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
-.total-label{font-size:10px;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:.05em}
-.total-sub{font-size:11px;color:#aaa;margin-top:4px}
-.total-markup{font-size:11px;color:#854F0B;margin-top:3px}
-.clear-btn{margin-top:8px;font-size:11px;padding:4px 10px;cursor:pointer;border:0.5px solid #ccc;background:#fff;border-radius:6px;color:#666}
-.total-amount{font-size:26px;font-weight:700;color:#111;text-align:right}
-.total-note{font-size:10px;color:#aaa;margin-top:3px;text-align:right}
-.total-mods{font-size:11px;color:#aaa;margin-bottom:2px;text-align:right}
-.pdf-btn{margin-top:12px;width:100%;padding:11px;background:#185FA5;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px}
-.pdf-btn:hover{background:#0C447C}
+:root {
+  --navy:       #0F2A4A;
+  --navy-mid:   #1A3D6B;
+  --blue:       #1E5FA8;
+  --blue-light: #3478C5;
+  --gold:       #B8860B;
+  --gold-light: #D4A017;
+  --gold-bg:    #FDF8ED;
+  --green:      #2A6B2A;
+  --green-bg:   #F0F7EC;
+  --purple:     #4A2D8A;
+  --purple-bg:  #F5F0FF;
+  --bg:         #F2F4F7;
+  --surface:    #FFFFFF;
+  --border:     #D9DDE5;
+  --border-soft:#E8EBF0;
+  --text:       #1A1E2A;
+  --text-mid:   #4A5568;
+  --text-soft:  #7A8599;
+  --text-faint: #A0ABBD;
+}
 
-/* ── PRINT STYLES ── */
+*{box-sizing:border-box;margin:0;padding:0}
+
+body {
+  font-family:'DM Sans',system-ui,sans-serif;
+  font-size:13px;
+  background:var(--bg);
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:24px 16px 40px;
+  color:var(--text);
+}
+
+/* ── LOGIN ─────────────────────────────────── */
+#login-screen {
+  background:var(--surface);
+  border-radius:16px;
+  border:1px solid var(--border);
+  padding:48px 44px 40px;
+  width:100%;
+  max-width:380px;
+  margin-top:72px;
+  text-align:center;
+  box-shadow:0 4px 24px rgba(15,42,74,.08);
+}
+.login-logo {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  margin-bottom:28px;
+}
+.login-logo-icon {
+  width:38px;height:38px;
+  background:var(--navy);
+  border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;
+  font-family:'Lora',serif;
+  font-weight:600;
+  font-size:16px;
+  letter-spacing:-.5px;
+}
+.login-logo-text {
+  text-align:left;
+}
+.login-logo-text strong {
+  display:block;
+  font-family:'Lora',serif;
+  font-size:15px;
+  font-weight:600;
+  color:var(--navy);
+  letter-spacing:-.2px;
+}
+.login-logo-text span {
+  font-size:11px;
+  color:var(--text-soft);
+  letter-spacing:.02em;
+}
+#login-screen .subtitle {
+  font-size:12px;
+  color:var(--text-soft);
+  margin-bottom:28px;
+  line-height:1.6;
+}
+#login-screen input {
+  width:100%;
+  padding:11px 16px;
+  border:1px solid var(--border);
+  border-radius:10px;
+  font-size:14px;
+  font-family:inherit;
+  outline:none;
+  margin-bottom:12px;
+  text-align:center;
+  letter-spacing:3px;
+  background:#FAFBFC;
+  color:var(--text);
+  transition:border-color .15s;
+}
+#login-screen input:focus {border-color:var(--blue);}
+#login-screen button {
+  width:100%;
+  padding:11px;
+  background:var(--navy);
+  color:#fff;
+  border:none;
+  border-radius:10px;
+  font-family:inherit;
+  font-size:13px;
+  font-weight:600;
+  letter-spacing:.04em;
+  cursor:pointer;
+  transition:background .15s;
+}
+#login-screen button:hover{background:var(--navy-mid);}
+#login-screen .error{color:#B91C1C;font-size:11px;margin-top:10px;}
+
+/* ── APP SHELL ──────────────────────────────── */
+#app{display:none;width:100%;max-width:900px}
+
+/* ── TOP HEADER ─────────────────────────────── */
+.header {
+  background:var(--navy);
+  border-radius:14px;
+  padding:16px 22px;
+  margin-bottom:10px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:14px;
+}
+.header-brand {
+  display:flex;align-items:center;gap:12px;
+}
+.header-icon {
+  width:34px;height:34px;
+  background:rgba(255,255,255,.1);
+  border-radius:7px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Lora',serif;
+  font-size:13px;
+  font-weight:600;
+  color:rgba(255,255,255,.9);
+  letter-spacing:-.3px;
+  flex-shrink:0;
+}
+.header h1 {
+  font-family:'Lora',serif;
+  font-size:15px;
+  font-weight:600;
+  color:#fff;
+  letter-spacing:-.1px;
+}
+.header p {
+  font-size:10px;
+  color:rgba(255,255,255,.5);
+  margin-top:2px;
+  letter-spacing:.05em;
+  text-transform:uppercase;
+}
+.header-inputs{display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
+.input-box {
+  display:flex;align-items:center;gap:8px;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:9px;
+  padding:7px 14px;
+  transition:background .15s;
+}
+.input-box:hover{background:rgba(255,255,255,.12);}
+.input-box label{
+  font-size:10px;
+  color:rgba(255,255,255,.5);
+  white-space:nowrap;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+}
+.input-box input {
+  border:none;
+  border-bottom:1.5px solid rgba(255,255,255,.3);
+  background:transparent;
+  font-family:inherit;
+  font-size:14px;
+  font-weight:600;
+  color:#fff;
+  outline:none;
+  text-align:right;
+  padding:2px 0;
+  width:84px;
+}
+.input-box.markup {
+  background:rgba(212,160,23,.12);
+  border-color:rgba(212,160,23,.35);
+}
+.input-box.markup input{border-bottom-color:rgba(212,160,23,.6);color:#F5CC60;}
+.modulo-efectivo{
+  margin-top:10px;
+  padding:7px 12px;
+  background:rgba(212,160,23,.12);
+  border:1px solid rgba(212,160,23,.25);
+  border-radius:8px;
+  font-size:11px;
+  color:#F5CC60;
+  width:100%;
+}
+.header-bottom{width:100%;}
+
+/* ── WORK DATA ───────────────────────────────── */
+.trabajo-box {
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:14px 18px;
+  margin-bottom:10px;
+}
+.trabajo-box .tit {
+  font-size:10px;
+  font-weight:600;
+  color:var(--text-soft);
+  margin-bottom:12px;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+}
+.trabajo-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.trabajo-field{display:flex;flex-direction:column;gap:5px;}
+.trabajo-field label{font-size:11px;color:var(--text-soft);font-weight:500;}
+.trabajo-field input,
+.trabajo-field textarea,
+.trabajo-field select {
+  font-family:inherit;
+  font-size:13px;
+  padding:7px 11px;
+  border:1px solid var(--border);
+  border-radius:8px;
+  background:#FAFBFC;
+  outline:none;
+  color:var(--text);
+  transition:border-color .15s;
+}
+.trabajo-field input:focus,
+.trabajo-field textarea:focus {border-color:var(--blue);}
+.trabajo-field textarea{resize:vertical;min-height:54px;}
+.trabajo-field.full{grid-column:1/-1;}
+
+/* ── TABS ────────────────────────────────────── */
+.tabs{display:flex;gap:8px;margin-bottom:10px;}
+.tab {
+  flex:1;
+  padding:10px 16px;
+  border-radius:10px;
+  border:1px solid var(--border);
+  background:var(--surface);
+  cursor:pointer;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-size:13px;
+  color:var(--text-mid);
+  font-weight:500;
+  transition:all .15s;
+}
+.tab:hover{border-color:#B0BCC8;}
+.tab.active-t {
+  background:#EBF3FF;
+  border:1.5px solid #8DBAE8;
+  color:var(--navy);
+  font-weight:600;
+}
+.tab.active-l {
+  background:var(--green-bg);
+  border:1.5px solid #8BC070;
+  color:var(--green);
+  font-weight:600;
+}
+.tab-badge {
+  font-size:11px;
+  padding:2px 9px;
+  border-radius:20px;
+  font-weight:600;
+  background:var(--bg);
+  color:var(--text-soft);
+}
+.tab.active-t .tab-badge{background:#BDD5F5;color:var(--navy);}
+.tab.active-l .tab-badge{background:#BBE0A0;color:var(--green);}
+
+/* ── COLUMN HEADERS ──────────────────────────── */
+.col-headers {
+  display:grid;
+  grid-template-columns:24px 1fr 90px 74px 72px 102px;
+  gap:6px;
+  padding:5px 14px;
+  font-size:10px;
+  color:var(--text-faint);
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:.07em;
+  border-top:1px solid var(--border-soft);
+}
+.col-headers.hora-cols{grid-template-columns:1fr 112px 92px 90px 110px;}
+
+/* ── GROUPS ──────────────────────────────────── */
+.group{
+  margin-bottom:8px;
+  border:1px solid var(--border);
+  border-radius:10px;
+  overflow:hidden;
+}
+.group-head {
+  padding:9px 14px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  cursor:pointer;
+  font-weight:600;
+  font-size:12px;
+  letter-spacing:.01em;
+  user-select:none;
+}
+.group-head.t{background:#EBF3FF;color:var(--navy);}
+.group-head.l{background:var(--green-bg);color:var(--green);}
+.group-head.h{background:var(--purple-bg);color:var(--purple);}
+.group-head .arrow {
+  font-size:10px;
+  opacity:.5;
+  transition:transform .2s;
+}
+.group-body{display:none;}
+.group-body.open{display:block;}
+
+/* ── ROWS ────────────────────────────────────── */
+.row {
+  display:grid;
+  grid-template-columns:24px 1fr 90px 74px 72px 102px;
+  gap:6px;
+  align-items:center;
+  padding:7px 14px;
+  border-top:1px solid var(--border-soft);
+  transition:background .1s;
+}
+.row.even{background:#fff;}
+.row.odd{background:#FAFBFC;}
+.row.checked-t{background:#EBF3FF;}
+.row.checked-l{background:#F0F7EC;}
+.row.checked-h{background:var(--purple-bg);}
+.row input[type=checkbox]{
+  cursor:pointer;
+  accent-color:var(--blue);
+  width:15px;height:15px;
+}
+.row.l-row input[type=checkbox]{accent-color:var(--green);}
+.item-name{font-size:12px;color:var(--text-mid);}
+.item-name.on{color:var(--text);font-weight:500;}
+.fixed-badge{font-size:10px;color:var(--text-faint);font-weight:400;}
+select,input[type=number]{
+  font-family:inherit;
+  font-size:12px;
+  padding:3px 6px;
+  border-radius:6px;
+  border:1px solid var(--border);
+  background:#fff;
+  outline:none;
+  color:var(--text);
+}
+select:focus,input[type=number]:focus{border-color:var(--blue);}
+select:disabled,input[type=number]:disabled{opacity:.3;cursor:not-allowed;}
+.mods{text-align:right;font-size:12px;color:var(--text-faint);}
+.mods.on{color:var(--text);font-weight:600;}
+.importe{text-align:right;font-size:12px;font-weight:600;color:var(--text-faint);}
+.importe.t{color:var(--blue);}
+.importe.l{color:var(--green);}
+.importe.h{color:var(--purple);}
+
+/* ── HORA ROWS ───────────────────────────────── */
+.hora-row{
+  display:grid;
+  grid-template-columns:1fr 112px 92px 90px 110px;
+  gap:6px;
+  align-items:center;
+  padding:8px 14px;
+  border-top:1px solid var(--border-soft);
+}
+.role-label{font-size:12px;font-weight:400;color:var(--text-mid);}
+.role-label.on{font-weight:600;color:var(--purple);}
+.role-desc{font-size:10px;color:var(--text-faint);margin-top:1px;}
+.mods-hora{text-align:center;font-size:12px;color:var(--purple);font-weight:500;}
+.mods-hora small{display:block;font-size:10px;color:var(--text-faint);font-weight:400;}
+.hora-input{text-align:center;}
+
+/* ── TOTAL BAR ───────────────────────────────── */
+.total-bar {
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:16px 22px;
+  margin-top:8px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:12px;
+}
+.total-label{
+  font-size:10px;
+  font-weight:700;
+  color:var(--text-soft);
+  text-transform:uppercase;
+  letter-spacing:.08em;
+}
+.total-sub{font-size:11px;color:var(--text-faint);margin-top:5px;}
+.total-markup{font-size:11px;color:var(--gold);margin-top:4px;}
+.clear-btn{
+  margin-top:10px;
+  font-size:11px;
+  padding:5px 12px;
+  cursor:pointer;
+  border:1px solid var(--border);
+  background:#fff;
+  border-radius:6px;
+  color:var(--text-mid);
+  font-family:inherit;
+  transition:all .15s;
+}
+.clear-btn:hover{background:var(--bg);border-color:#B0BCC8;}
+.total-amount{
+  font-family:'Lora',serif;
+  font-size:30px;
+  font-weight:600;
+  color:var(--navy);
+  text-align:right;
+  letter-spacing:-.5px;
+}
+.total-note{font-size:10px;color:var(--text-faint);margin-top:4px;text-align:right;}
+.total-mods{font-size:11px;color:var(--text-soft);margin-bottom:3px;text-align:right;}
+
+/* ── PDF BUTTON ──────────────────────────────── */
+.pdf-btn {
+  margin-top:10px;
+  width:100%;
+  padding:12px;
+  background:var(--navy);
+  color:#fff;
+  border:none;
+  border-radius:10px;
+  font-family:inherit;
+  font-size:13px;
+  font-weight:600;
+  letter-spacing:.04em;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  transition:background .15s;
+}
+.pdf-btn:hover{background:var(--navy-mid);}
+.pdf-btn svg{opacity:.8;}
+
+/* ── PRINT ───────────────────────────────────── */
 @media print{
-  body{background:#fff;padding:0;display:block}
-  #login-screen,#app .header-inputs,#app .tabs,#section-t,#section-l,#group-hora,.total-bar,.pdf-btn,.trabajo-box,.clear-btn{display:none!important}
+  body{background:#fff;padding:0;display:block;}
+  #login-screen,#app .header-inputs,#app .tabs,
+  #section-t,#section-l,#group-hora,.total-bar,
+  .pdf-btn,.trabajo-box,.clear-btn{display:none!important}
   #print-report{display:block!important}
 }
-#print-report{display:none}
+#print-report{display:none;}
 
-/* REPORT STYLES (visible al imprimir) */
-.rpt{font-family:system-ui,sans-serif;font-size:12px;color:#111;max-width:800px;margin:0 auto;padding:20px}
-.rpt-logo{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:18px;padding-bottom:14px;border-bottom:2px solid #185FA5}
-.rpt-logo h1{font-size:20px;font-weight:700;color:#185FA5}
-.rpt-logo .sub{font-size:11px;color:#888;margin-top:3px}
-.rpt-logo .fecha{font-size:11px;color:#888;text-align:right}
-.rpt-datos{background:#f5f5f3;border-radius:8px;padding:12px 16px;margin-bottom:16px;display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.rpt-datos .field label{font-size:10px;color:#888;text-transform:uppercase;letter-spacing:.04em}
-.rpt-datos .field p{font-size:13px;font-weight:500;margin-top:2px}
-.rpt-datos .field.full{grid-column:1/-1}
-.rpt-section{margin-bottom:14px}
-.rpt-section h3{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;padding:5px 10px;margin-bottom:0;border-radius:4px 4px 0 0}
-.rpt-section h3.t{background:#E6F1FB;color:#0C447C}
-.rpt-section h3.l{background:#EAF3DE;color:#27500A}
-.rpt-section h3.h{background:#F3EEFB;color:#4A2D8A}
-.rpt-table{width:100%;border-collapse:collapse;font-size:12px}
-.rpt-table th{background:#f0f0ee;padding:5px 8px;text-align:left;font-weight:600;font-size:10px;color:#666;border:0.5px solid #ddd}
-.rpt-table th:last-child,.rpt-table td:last-child{text-align:right}
-.rpt-table th:nth-child(3),.rpt-table td:nth-child(3){text-align:center}
-.rpt-table td{padding:5px 8px;border:0.5px solid #eee}
-.rpt-table tr:nth-child(even) td{background:#fafaf8}
-.rpt-total{background:#185FA5;color:#fff;border-radius:6px;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;margin-top:16px}
-.rpt-total .lbl{font-size:11px;opacity:.85}
-.rpt-total .amt{font-size:22px;font-weight:700}
-.rpt-total .sub2{font-size:10px;opacity:.7;margin-top:2px;text-align:right}
-.rpt-footer{margin-top:20px;padding-top:10px;border-top:0.5px solid #ddd;font-size:10px;color:#aaa;text-align:center}
-.rpt-notas{background:#fffbe6;border:0.5px solid #f0d080;border-radius:6px;padding:10px 14px;margin-top:14px;font-size:12px}
-.rpt-notas label{font-size:10px;font-weight:600;color:#888;text-transform:uppercase}
-.rpt-notas p{margin-top:4px;color:#333}
+/* ── REPORT ──────────────────────────────────── */
+.rpt{font-family:'DM Sans',system-ui,sans-serif;font-size:12px;color:#111;max-width:800px;margin:0 auto;padding:24px;}
+.rpt-logo{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px;padding-bottom:16px;border-bottom:2px solid var(--navy);}
+.rpt-logo h1{font-family:'Lora',serif;font-size:22px;font-weight:600;color:var(--navy);}
+.rpt-logo .sub{font-size:11px;color:#888;margin-top:4px;}
+.rpt-logo .fecha{font-size:11px;color:#888;text-align:right;}
+.rpt-datos{background:#f5f5f3;border-radius:8px;padding:12px 16px;margin-bottom:16px;display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.rpt-datos .field label{font-size:10px;color:#888;text-transform:uppercase;letter-spacing:.05em;}
+.rpt-datos .field p{font-size:13px;font-weight:500;margin-top:2px;}
+.rpt-datos .field.full{grid-column:1/-1;}
+.rpt-section{margin-bottom:14px;}
+.rpt-section h3{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;padding:5px 10px;margin-bottom:0;border-radius:4px 4px 0 0;}
+.rpt-section h3.t{background:#EBF3FF;color:var(--navy);}
+.rpt-section h3.l{background:var(--green-bg);color:var(--green);}
+.rpt-section h3.h{background:var(--purple-bg);color:var(--purple);}
+.rpt-table{width:100%;border-collapse:collapse;font-size:12px;}
+.rpt-table th{background:#f0f0ee;padding:5px 8px;text-align:left;font-weight:600;font-size:10px;color:#666;border:1px solid #ddd;}
+.rpt-table th:last-child,.rpt-table td:last-child{text-align:right;}
+.rpt-table th:nth-child(3),.rpt-table td:nth-child(3){text-align:center;}
+.rpt-table td{padding:5px 8px;border:1px solid #eee;}
+.rpt-table tr:nth-child(even) td{background:#fafaf8;}
+.rpt-total{background:var(--navy);color:#fff;border-radius:8px;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;margin-top:16px;}
+.rpt-total .lbl{font-size:11px;opacity:.8;}
+.rpt-total .amt{font-family:'Lora',serif;font-size:24px;font-weight:600;}
+.rpt-total .sub2{font-size:10px;opacity:.6;margin-top:2px;text-align:right;}
+.rpt-footer{margin-top:20px;padding-top:10px;border-top:1px solid #ddd;font-size:10px;color:#aaa;text-align:center;}
+.rpt-notas{background:#fffbe6;border:1px solid #f0d080;border-radius:6px;padding:10px 14px;margin-top:14px;font-size:12px;}
+.rpt-notas label{font-size:10px;font-weight:600;color:#888;text-transform:uppercase;}
+.rpt-notas p{margin-top:4px;color:#333;}
 </style>
 </head>
 <body>
 
 <!-- LOGIN -->
 <div id="login-screen">
-  <h2>San Miguel Contadores</h2>
-  <p>Calculadora de honorarios profesionales<br>Ingresá la contraseña para continuar</p>
+  <div class="login-logo">
+    <div class="login-logo-icon">SM</div>
+    <div class="login-logo-text">
+      <strong>San Miguel Contadores</strong>
+      <span>Herramienta interna</span>
+    </div>
+  </div>
+  <p class="subtitle">Calculadora de honorarios profesionales<br>Ingresá la contraseña para continuar</p>
   <input type="password" id="pwd-input" placeholder="Contraseña" onkeydown="if(event.key==='Enter')checkPwd()">
   <button onclick="checkPwd()">Ingresar</button>
   <div class="error" id="pwd-error"></div>
@@ -135,23 +530,26 @@ select:disabled,input[type=number]:disabled{opacity:.35;cursor:not-allowed}
 <div id="app">
 
   <div class="header">
-    <div class="header-top">
+    <div class="header-brand">
+      <div class="header-icon">SM</div>
       <div>
         <h1>Calculadora de honorarios profesionales</h1>
         <p>CPCECABA · Res. C.D. Nº 63/2007 · Tributario y Laboral/Previsional</p>
       </div>
-      <div class="header-inputs">
-        <div class="input-box">
-          <label>Módulo $</label>
-          <input type="text" id="mod-input" value="13.683" oninput="onModulo(this.value)">
-        </div>
-        <div class="input-box" id="markup-box">
-          <label>Mark-up %</label>
-          <input type="text" id="markup-input" value="0" oninput="onMarkup(this.value)">
-        </div>
+    </div>
+    <div class="header-inputs">
+      <div class="input-box">
+        <label>Módulo $</label>
+        <input type="text" id="mod-input" value="13.683" oninput="onModulo(this.value)">
+      </div>
+      <div class="input-box" id="markup-box">
+        <label>Mark-up %</label>
+        <input type="text" id="markup-input" value="0" oninput="onMarkup(this.value)">
       </div>
     </div>
-    <div id="modulo-efectivo-bar" style="display:none" class="modulo-efectivo"></div>
+    <div class="header-bottom">
+      <div id="modulo-efectivo-bar" style="display:none" class="modulo-efectivo"></div>
+    </div>
   </div>
 
   <!-- DATOS DEL TRABAJO -->
@@ -189,11 +587,12 @@ select:disabled,input[type=number]:disabled{opacity:.35;cursor:not-allowed}
   <div class="group" id="group-hora">
     <div class="group-head h" onclick="toggleGH()">
       <span>Valor hora por categoría — tareas no especificadas (Res. 63/2007 §3.2)</span>
-      <span id="arrow-gh">▲</span>
+      <span class="arrow" id="arrow-gh">▲</span>
     </div>
     <div class="group-body open" id="body-gh">
-      <div class="col-headers hora-cols" style="background:#faf8ff;border-top:0.5px solid #eee">
-        <div>Categoría</div><div style="text-align:center">Mód/hora</div>
+      <div class="col-headers hora-cols" style="background:#FAF8FF;border-top:1px solid var(--border-soft)">
+        <div>Categoría</div>
+        <div style="text-align:center">Mód/hora</div>
         <div style="text-align:center">Hs. estimadas</div>
         <div style="text-align:right">Módulos</div>
         <div style="text-align:right">Importe</div>
@@ -217,7 +616,8 @@ select:disabled,input[type=number]:disabled{opacity:.35;cursor:not-allowed}
   </div>
 
   <button class="pdf-btn" onclick="generarPDF()">
-    &#128438; Generar informe PDF
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+    Generar informe PDF
   </button>
 
 </div>
@@ -337,10 +737,10 @@ function renderSection(sec){
         <option value="a" ${(s.comp||'m')==='a'?'selected':''}>Alta</option>
         <option value="m" ${(s.comp||'m')==='m'?'selected':''}>Media</option>
         <option value="b" ${(s.comp||'m')==='b'?'selected':''}>Baja</option>
-      </select>`:'<span style="font-size:11px;color:#bbb">—</span>';
+      </select>`:'<span style="font-size:11px;color:var(--text-faint)">—</span>';
       const qtyEl=`<div style="display:flex;align-items:center;gap:3px">
         <input type="number" min="1" value="${s.qty||1}" ${s.on?'':'disabled'} style="width:46px;text-align:center" onchange="updateSel('${item.id}','qty',Math.max(1,parseInt(this.value)||1))">
-        <span style="font-size:10px;color:#aaa">${isHour?'hs':'×'}</span></div>`;
+        <span style="font-size:10px;color:var(--text-faint)">${isHour?'hs':'×'}</span></div>`;
       return `<div class="row ${cls} ${isT?'':'l-row'}">
         <input type="checkbox" ${s.on?'checked':''} onchange="toggleItem('${item.id}',this.checked)">
         <div class="item-name ${s.on?'on':''}">${item.n}${item.fixed!==undefined?`<span class="fixed-badge"> (fijo: ${item.fixed})</span>`:''}</div>
@@ -350,9 +750,9 @@ function renderSection(sec){
       </div>`;
     }).join('');
     return `<div class="group">
-      <div class="group-head ${sec}" onclick="toggleGroup('${g.gid}')"><span>${g.name}</span><span>${isOpen?'▲':'▼'}</span></div>
+      <div class="group-head ${sec}" onclick="toggleGroup('${g.gid}')"><span>${g.name}</span><span class="arrow">${isOpen?'▲':'▼'}</span></div>
       <div class="group-body ${isOpen?'open':''}" id="gb-${g.gid}">
-        <div class="col-headers" style="background:${isT?'#EEF6FF':'#F0FAE8'};border-top:0.5px solid #eee">
+        <div class="col-headers" style="background:${isT?'#EBF3FF':'#F0F7EC'};border-top:1px solid var(--border-soft)">
           <div></div><div>Tarea</div><div>Complejidad</div>
           <div style="text-align:center">Cant./hs.</div>
           <div style="text-align:right">Módulos</div>
@@ -414,7 +814,6 @@ function generarPDF(){
   const notas=document.getElementById('d-notas').value;
   const hoy=new Date().toLocaleDateString('es-AR',{day:'2-digit',month:'long',year:'numeric'});
 
-  // Armar filas por sección
   function secRows(sec){
     let rows=[];
     DATA[sec].forEach(g=>{
@@ -442,7 +841,7 @@ function generarPDF(){
   horaRows.forEach(r=>horasM+=r.mods);
   const totalM=tribM+labM+horasM;
 
-  function buildTable(rows,cls){
+  function buildTable(rows){
     if(!rows.length)return '<p style="font-size:11px;color:#aaa;padding:6px 10px">Sin ítems seleccionados.</p>';
     return `<table class="rpt-table">
       <thead><tr><th>Tarea</th><th>Detalle</th><th>Módulos</th><th>Importe</th></tr></thead>
@@ -466,9 +865,9 @@ function generarPDF(){
       <div class="field"><label>Cliente</label><p>${cliente}</p></div>
       <div class="field"><label>Período</label><p>${periodo}</p></div>
     </div>
-    ${tribRows.length?`<div class="rpt-section"><h3 class="t">Tributario</h3>${buildTable(tribRows,'t')}</div>`:''}
-    ${labRows.length?`<div class="rpt-section"><h3 class="l">Laboral y previsional</h3>${buildTable(labRows,'l')}</div>`:''}
-    ${horaRows.length?`<div class="rpt-section"><h3 class="h">Valor hora – tareas no especificadas</h3>${buildTable(horaRows,'h')}</div>`:''}
+    ${tribRows.length?`<div class="rpt-section"><h3 class="t">Tributario</h3>${buildTable(tribRows)}</div>`:''}
+    ${labRows.length?`<div class="rpt-section"><h3 class="l">Laboral y previsional</h3>${buildTable(labRows)}</div>`:''}
+    ${horaRows.length?`<div class="rpt-section"><h3 class="h">Valor hora – tareas no especificadas</h3>${buildTable(horaRows)}</div>`:''}
     <div class="rpt-total">
       <div><div class="lbl">Total honorarios estimados</div><div class="lbl">${fmtM(totalM)} módulos · Sin IVA</div></div>
       <div><div class="amt">${fmt(totalM*me)}</div><div class="sub2">Valores orientativos · Res. CD 63/2007 CPCECABA</div></div>
