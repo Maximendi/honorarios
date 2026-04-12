@@ -299,7 +299,7 @@ body {
 /* ── COLUMN HEADERS ──────────────────────────── */
 .col-headers {
   display:grid;
-  grid-template-columns:24px 1fr 90px 74px 72px 102px;
+  grid-template-columns:24px 1fr 90px 100px 72px 102px;
   gap:6px;
   padding:5px 14px;
   font-size:10px;
@@ -310,6 +310,7 @@ body {
   border-top:1px solid var(--border-soft);
 }
 .col-headers.hora-cols{grid-template-columns:1fr 112px 92px 90px 110px;}
+.col-headers.freq-cols{grid-template-columns:24px 1fr 90px 100px 100px 72px 102px;}
 
 /* ── GROUPS ──────────────────────────────────── */
 .group{
@@ -343,13 +344,14 @@ body {
 /* ── ROWS ────────────────────────────────────── */
 .row {
   display:grid;
-  grid-template-columns:24px 1fr 90px 74px 72px 102px;
+  grid-template-columns:24px 1fr 90px 100px 72px 102px;
   gap:6px;
   align-items:center;
   padding:7px 14px;
   border-top:1px solid var(--border-soft);
   transition:background .1s;
 }
+.row.freq-row{grid-template-columns:24px 1fr 90px 100px 100px 72px 102px;}
 .row.even{background:#fff;}
 .row.odd{background:#FAFBFC;}
 .row.checked-t{background:#EBF3FF;}
@@ -398,6 +400,34 @@ select:disabled,input[type=number]:disabled{opacity:.3;cursor:not-allowed;}
 .mods-hora{text-align:center;font-size:12px;color:var(--purple);font-weight:500;}
 .mods-hora small{display:block;font-size:10px;color:var(--text-faint);font-weight:400;}
 .hora-input{text-align:center;}
+
+/* ── TOGGLE ANUAL/MENSUAL ────────────────────── */
+.period-toggle {
+  display:inline-flex;
+  border:1px solid var(--border);
+  border-radius:6px;
+  overflow:hidden;
+}
+.period-toggle button {
+  padding:3px 9px;
+  border:none;
+  background:#fff;
+  color:var(--text-soft);
+  cursor:pointer;
+  font-family:inherit;
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:.03em;
+  transition:all .12s;
+}
+.period-toggle button.active {
+  background:var(--navy);
+  color:#fff;
+}
+.period-toggle button:disabled {
+  opacity:.3;
+  cursor:not-allowed;
+}
 
 /* ── TOTAL BAR ───────────────────────────────── */
 .total-bar {
@@ -640,19 +670,20 @@ const DATA={
       {id:"iibb_cm",n:"IIBB – Convenio Multilateral",a:20,m:12,b:10},
       {id:"sicore",n:"SI.CO.RE.",a:20,m:12,b:10},
       {id:"iva",n:"I.V.A.",a:15,m:10,b:7},
+      {id:"idcb",n:"Impuesto sobre los débitos y créditos bancarios",a:20,m:12,b:10},
       {id:"ret_loc",n:"Retención y Percepción Locales",a:20,m:12,b:10},
     ]},
-    {gid:"g2",name:"Liquidación anual de impuestos",items:[
+    {gid:"g2",name:"Liquidación anual de impuestos",annual:true,items:[
       {id:"gcias_pf",n:"Ganancias – Personas Físicas",a:80,m:50,b:30},
       {id:"bp",n:"Bienes Personales",a:35,m:20,b:15},
       {id:"bp_acc",n:"Bienes Personales – Acciones y Part. Soc.",a:20,m:15,b:10},
       {id:"gcias_pj",n:"Ganancias – Personas Jurídicas",a:55,m:35,b:25},
-      {id:"gmp",n:"Ganancia Mínima Presunta",a:40,m:25,b:15},
+      {id:"gmp",n:"Reg. Información Acciones y Part. Soc.",a:20,m:15,b:10},
       {id:"iibb_a",n:"Ingresos Brutos Locales (anual)",a:25,m:20,b:15},
       {id:"cm_a",n:"Convenio Multilateral (anual)",a:55,m:30,b:20},
     ]},
     {gid:"g3",name:"Regímenes de información",items:[
-      {id:"reginfo",n:"CITI Ventas/Compras, SITER, etc.",fixed:15},
+      {id:"reginfo",n:"Reg. Inf. PSP (F8125 y F8126)",a:20,m:15,b:10},
     ]},
     {gid:"g4",name:"Inspecciones y requerimientos",items:[
       {id:"insp_t",n:"Por hora profesional (mín. 30 mód.)",a:27,m:20,b:13,byHour:true},
@@ -677,15 +708,15 @@ const DATA={
     ]},
   ],
   l:[
-    {gid:"g7",name:"Liquidación mensual sueldos y cargas sociales",items:[
-      {id:"sue_10",n:"Hasta 10 empleados",fixed:15},
-      {id:"sue_40",n:"De 11 a 40 empleados",fixed:30},
-      {id:"sue_80",n:"De 41 a 80 empleados",fixed:45},
-      {id:"sue_160",n:"De 81 a 160 empleados",fixed:65},
-      {id:"sue_mas",n:"Más de 160 empleados",fixed:85},
+    {gid:"g7",name:"Liquidación mensual sueldos, cargas sociales y sindicales",freq:true,items:[
+      {id:"sue_10",n:"Hasta 10 empleados",b:15,m:21,a:24},
+      {id:"sue_40",n:"De 11 a 40 empleados",b:30,m:42,a:48},
+      {id:"sue_80",n:"De 41 a 80 empleados",b:45,m:63,a:72},
+      {id:"sue_160",n:"De 81 a 160 empleados",b:65,m:91,a:104},
+      {id:"sue_mas",n:"Más de 160 empleados",b:85,m:119,a:136},
     ]},
-    {gid:"g8",name:"Inscripciones y trámites previsionales",items:[
-      {id:"afip_empl",n:"Inscripción AFIP – Empleador",fixed:30},
+    {gid:"g8",name:"Inscripciones, trámites y parametrización sistema",items:[
+      {id:"afip_empl",n:"Parametrización sistema",b:15,m:30,a:60},
       {id:"asig_as",n:"Asesoramiento reintegro asignaciones familiares",fixed:10},
       {id:"asig_tr",n:"Certificación y trámite reintegro asignaciones",fixed:20},
       {id:"deudas_prev",n:"Det. deudas/créditos previsionales (por año/afiliado)",fixed:20},
@@ -717,7 +748,9 @@ function getMods(item,s){
   if(item.fixed!==undefined)return item.fixed*qty;
   const base=item[c]||0;
   if(item.byHour)return Math.max(base*qty,30);
-  return base*qty;
+  const divisor=(item.annual&&s.period==='mensual')?12:1;
+  const freqMult=(item.freq&&s.freq==='quincenal')?1.6:1;
+  return base*qty/divisor*freqMult;
 }
 function compLabel(c){return c==='a'?'Alta':c==='b'?'Baja':'Media';}
 
@@ -726,8 +759,15 @@ function renderSection(sec){
   const isT=sec==='t';
   el.innerHTML=DATA[sec].map(g=>{
     const isOpen=openGroups[g.gid];
+    const isAnnual=!!g.annual;
+    const isFreq=!!g.freq;
     const rows=g.items.map((item,idx)=>{
-      const s=sel[item.id]||{on:false,comp:'m',qty:1};
+      if(isAnnual) item.annual=true;
+      if(isFreq) item.freq=true;
+      if(!sel[item.id]) sel[item.id]={on:false,comp:'m',qty:1,period:'anual',freq:'mensual'};
+      const s=sel[item.id];
+      if(isAnnual&&!s.period) s.period='anual';
+      if(isFreq&&!s.freq) s.freq='mensual';
       const mods=getMods(item,s);
       const me=modEfectivo();
       const hasComp=item.fixed===undefined&&!item.byHour;
@@ -738,23 +778,40 @@ function renderSection(sec){
         <option value="m" ${(s.comp||'m')==='m'?'selected':''}>Media</option>
         <option value="b" ${(s.comp||'m')==='b'?'selected':''}>Baja</option>
       </select>`:'<span style="font-size:11px;color:var(--text-faint)">—</span>';
-      const qtyEl=`<div style="display:flex;align-items:center;gap:3px">
-        <input type="number" min="1" value="${s.qty||1}" ${s.on?'':'disabled'} style="width:46px;text-align:center" onchange="updateSel('${item.id}','qty',Math.max(1,parseInt(this.value)||1))">
-        <span style="font-size:10px;color:var(--text-faint)">${isHour?'hs':'×'}</span></div>`;
-      return `<div class="row ${cls} ${isT?'':'l-row'}">
+      let qtyEl;
+      if(isAnnual){
+        const p=s.period||'anual';
+        qtyEl=`<div class="period-toggle">
+          <button class="${p==='anual'?'active':''}" ${s.on?'':'disabled'} onmousedown="event.preventDefault();setPeriod('${item.id}','anual')">Anual</button>
+          <button class="${p==='mensual'?'active':''}" ${s.on?'':'disabled'} onmousedown="event.preventDefault();setPeriod('${item.id}','mensual')">Mens.</button>
+        </div>`;
+      } else {
+        qtyEl=`<div style="display:flex;align-items:center;gap:3px">
+          <input type="number" min="1" value="${s.qty||1}" ${s.on?'':'disabled'} style="width:46px;text-align:center" onchange="updateSel('${item.id}','qty',Math.max(1,parseInt(this.value)||1))">
+          <span style="font-size:10px;color:var(--text-faint)">${isHour?'hs':'×'}</span></div>`;
+      }
+      const freqEl=isFreq?`<div class="period-toggle">
+          <button class="${(s.freq||'mensual')==='mensual'?'active':''}" ${s.on?'':'disabled'} onmousedown="event.preventDefault();setFreq('${item.id}','mensual')">Mens.</button>
+          <button class="${(s.freq||'mensual')==='quincenal'?'active':''}" ${s.on?'':'disabled'} onmousedown="event.preventDefault();setFreq('${item.id}','quincenal')">Quin.</button>
+        </div>`:'';
+      return `<div class="row ${cls} ${isT?'':'l-row'} ${isFreq?'freq-row':''}">
         <input type="checkbox" ${s.on?'checked':''} onchange="toggleItem('${item.id}',this.checked)">
         <div class="item-name ${s.on?'on':''}">${item.n}${item.fixed!==undefined?`<span class="fixed-badge"> (fijo: ${item.fixed})</span>`:''}</div>
-        ${compSel}${qtyEl}
+        ${compSel}${qtyEl}${freqEl}
         <div class="mods ${s.on&&mods>0?'on':''}">${s.on&&mods>0?fmtM(mods):'—'}</div>
         <div class="importe ${s.on&&mods>0?(isT?'t':'l'):''}">${s.on&&mods>0?fmt(mods*me):'—'}</div>
       </div>`;
     }).join('');
+    const colHeader=isAnnual?'Período':'Cant./hs.';
+    const freqHeader=isFreq?'<div style="text-align:center">Frecuencia</div>':'';
+    const colClass=isFreq?'freq-cols':'';
     return `<div class="group">
       <div class="group-head ${sec}" onclick="toggleGroup('${g.gid}')"><span>${g.name}</span><span class="arrow">${isOpen?'▲':'▼'}</span></div>
       <div class="group-body ${isOpen?'open':''}" id="gb-${g.gid}">
-        <div class="col-headers" style="background:${isT?'#EBF3FF':'#F0F7EC'};border-top:1px solid var(--border-soft)">
+        <div class="col-headers ${colClass}" style="background:${isT?'#EBF3FF':'#F0F7EC'};border-top:1px solid var(--border-soft)">
           <div></div><div>Tarea</div><div>Complejidad</div>
-          <div style="text-align:center">Cant./hs.</div>
+          <div style="text-align:center">${colHeader}</div>
+          ${freqHeader}
           <div style="text-align:right">Módulos</div>
           <div style="text-align:right">Importe</div>
         </div>${rows}
@@ -822,7 +879,7 @@ function generarPDF(){
         if(!s||!s.on)return;
         const mods=getMods(it,s);
         if(mods<=0)return;
-        const comp=it.fixed!==undefined?'Fijo':(it.byHour?compLabel(s.comp||'m')+' ('+((s.qty||1))+' hs)':compLabel(s.comp||'m')+(s.qty>1?' ×'+s.qty:''));
+        const comp=it.fixed!==undefined?'Fijo':(it.byHour?compLabel(s.comp||'m')+' ('+((s.qty||1))+' hs)':compLabel(s.comp||'m')+(s.qty>1?' ×'+s.qty:'')+(it.annual&&s.period==='mensual'?' · Mensual':''));
         rows.push({n:it.n,comp,mods,imp:mods*me});
       });
     });
@@ -879,8 +936,10 @@ function generarPDF(){
   window.print();
 }
 
-function toggleItem(id,checked){if(!sel[id])sel[id]={on:false,comp:'m',qty:1};sel[id].on=checked;render();}
-function updateSel(id,key,val){if(!sel[id])sel[id]={on:true,comp:'m',qty:1};sel[id][key]=val;render();}
+function toggleItem(id,checked){if(!sel[id])sel[id]={on:false,comp:'m',qty:1,period:'anual',freq:'mensual'};sel[id].on=checked;render();}
+function updateSel(id,key,val){if(!sel[id])sel[id]={on:true,comp:'m',qty:1,period:'anual',freq:'mensual'};sel[id][key]=val;render();}
+function setPeriod(id,period){if(!sel[id])sel[id]={on:true,comp:'m',qty:1,period:'anual',freq:'mensual'};sel[id].period=period;render();}
+function setFreq(id,freq){if(!sel[id])sel[id]={on:true,comp:'m',qty:1,period:'anual',freq:'mensual'};sel[id].freq=freq;render();}
 function updateHoras(id,val){horas[id]=parseFloat(val)||0;renderHoras();updateTotals();}
 function toggleGroup(gid){openGroups[gid]=!openGroups[gid];render();}
 function toggleGH(){ghOpen=!ghOpen;document.getElementById('body-gh').className='group-body'+(ghOpen?' open':'');document.getElementById('arrow-gh').textContent=ghOpen?'▲':'▼';}
